@@ -1,0 +1,66 @@
+.landing-container {
+  height: 93vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#particles canvas{
+  z-index: -1;
+}
+
+.disp-container {
+  margin-top: 80px;
+  width: 50%;
+  color: white;
+  /* border: 2px solid blue; */
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bolder;
+}
+
+.chatbox {
+  display: flex;
+  position: absolute;
+  background-color: white;
+  color: rgb(44, 100, 77);
+  border-radius: 10px;
+  height: 180px;
+  width: 200px;
+  right: 2%;
+  bottom: 12%;
+  border: 1px solid white;
+}
+
+.chatbox span {
+  padding: 7px;
+}
+
+.unlock-display {
+  background-color: #bfbfbf;
+  top: 15%;
+  position: absolute;
+  height: 60vh;
+  width: 60vh;
+  background-color: #dedede;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.unlock-display input {
+  background-color: #dedede;
+  border: 1px solid rgb(44, 100, 77);
+  text-align: center;
+  padding: 2px;
+}
+
+.unlock-display form {
+  margin-top: 120px;
+  text-align: center;
+}
+
+.unlock-display label {
+  display: block;
+}
