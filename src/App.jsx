@@ -2,6 +2,7 @@ import * as React from 'react';
 import Dashboard from './modules/dashboard/pages/DashBoard';
 import { ChatBox } from './shared/components/ChatBox';
 import LandingPage from './modules/landing/pages/LandingPage';
+import Poll from './modules/poll/pages/poll';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Dashboard />
       {/* This Component Css ko sexy kar diyooo */}
       <ChatBox />  
+      <Poll/>
     </>
   )
 }

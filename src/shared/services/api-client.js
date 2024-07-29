@@ -17,5 +17,10 @@ const postAQuestion = async (question,options,password)=>{
   return response.data;
 }
 
+const pollAQuestion = async (question,option)=>{
+  const response = await axios.post(`${import.meta.env.VITE_UPDATEAPOLL}`, {question,option});
+  return response.data;
+}
 
-export {getALLQuestion,getAQuestion ,postAQuestion}
+
+export {getALLQuestion,getAQuestion ,postAQuestion ,pollAQuestion}
