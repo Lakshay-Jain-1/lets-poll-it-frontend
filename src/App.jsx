@@ -6,8 +6,9 @@ import Poll from './modules/poll/pages/poll';
 
 
 function App() {
-
-
+   
+    {/* Route 1 - LandingPage  Route 2 - Dashboard ChatBox  Route 3 - Poll   */}
+ 
   return (
     <>
       {/* Ismein apna vala chatbox hatake mere vala ChatBox daal diyooo
@@ -17,7 +18,8 @@ function App() {
       {/* isske dashboard mein star vala diyoo shayyad achha lage   */}
       <Dashboard />
       {/* This Component Css ko sexy kar diyooo */}
-      <ChatBox />  
+      <ChatBox /> 
+        {/* This will go into different Page */}
       <Poll/>
     </>
   )
