@@ -9,9 +9,14 @@ function App() {
 
   return (
     <>
-      {/* <LandingPage /> */}
+      {/* Ismein apna vala chatbox hatake mere vala ChatBox daal diyooo
+          <LandingPage />    tera component ka maine naam change kar diya tha to landing page 
+      */}
+      
+      {/* isske dashboard mein star vala diyoo shayyad achha lage   */}
       <Dashboard />
-      <ChatBox />
+      {/* This Component Css ko sexy kar diyooo */}
+      <ChatBox />  
     </>
   )
 }
