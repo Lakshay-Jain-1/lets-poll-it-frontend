@@ -3,6 +3,7 @@ import axios from "axios";
 
 const getALLQuestion = async () => {
   const response = await axios.get(import.meta.env.VITE_ALLQUESTION);
+  console.log(response.data)
   return response.data;
 };
 
