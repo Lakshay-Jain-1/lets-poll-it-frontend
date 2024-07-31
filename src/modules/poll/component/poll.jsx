@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import {  pollAQuestion} from "../../../shared/services/api-client";
+import { pollAQuestion } from "../../../shared/services/api-client";
 
 import "../../../stylesheets/Options.css";
 import Texttospeech from "../../../shared/services/texttospeech";
@@ -11,7 +11,6 @@ export default function Poll() {
   const [option2, setOption2] = useState();
   const [option3, setOption3] = useState();
   const [option4, setOption4] = useState();
-
 
   useEffect(() => {
     setQuestion(localStorage.getItem("question"));
@@ -26,21 +25,22 @@ export default function Poll() {
         event.target.setAttribute("clicked", "true");
       });
     });
-   
   });
 
   function handlePoll() {
-
     document.querySelectorAll(".pollbutton").forEach((ele) => {
-      console.log(ele)
-    
-      if (ele.getAttribute("clicked") && ele.innerText != "Submit" && ele.innerText !="Explore or Create Your Own Pol") {
+      console.log(ele);
+
+      if (
+        ele.getAttribute("clicked") &&
+        ele.innerText != "Submit" &&
+        ele.innerText != "Explore or Create Your Own Pol"
+      ) {
         pollit(question, ele.innerText);
       }
-     
     });
-    localStorage.setItem("poll", true)
-    Texttospeech("Submitted")
+    localStorage.setItem("poll", true);
+    Texttospeech("Submitted");
   }
 
   async function pollit(question, option) {
@@ -49,7 +49,7 @@ export default function Poll() {
 
   const formStyle = {
     display: "block",
-    width: "400px",
+    width: "500px",
     position: "absolute",
     transform: "translate(-50%,-50%)",
     top: "50%",
@@ -142,15 +142,15 @@ export default function Poll() {
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "Poppins" }}>
       <button
         onClick={(e) => window.location.reload()}
         onMouseOver={(e) =>
           (e.currentTarget.style.backgroundColor = hoverStyle.backgroundColor)
         }
         onMouseOut={(e) =>
-        (e.currentTarget.style.backgroundColor =
-          refreshButtonStyle.backgroundColor)
+          (e.currentTarget.style.backgroundColor =
+            refreshButtonStyle.backgroundColor)
         }
         style={refreshButtonStyle}
       >
@@ -165,12 +165,12 @@ export default function Poll() {
           <button
             className="pollbutton"
             onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              hoverStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                hoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              buttonStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonStyle.backgroundColor)
             }
             style={buttonStyle}
           >
@@ -178,14 +178,14 @@ export default function Poll() {
             {option1}{" "}
           </button>
           <button
-           className="pollbutton"
+            className="pollbutton"
             onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              hoverStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                hoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              buttonStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonStyle.backgroundColor)
             }
             style={buttonStyle}
           >
@@ -193,14 +193,14 @@ export default function Poll() {
             {option2}{" "}
           </button>
           <button
-           className="pollbutton"
+            className="pollbutton"
             onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              hoverStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                hoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              buttonStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonStyle.backgroundColor)
             }
             style={buttonStyle}
           >
@@ -208,14 +208,14 @@ export default function Poll() {
             {option3}{" "}
           </button>
           <button
-           className="pollbutton"
+            className="pollbutton"
             onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              hoverStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                hoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              buttonStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonStyle.backgroundColor)
             }
             style={buttonStyle}
           >
@@ -226,12 +226,12 @@ export default function Poll() {
         <div style={divStyle}>
           <button
             onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              hoverStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                hoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              submitButtonStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                submitButtonStyle.backgroundColor)
             }
             style={submitButtonStyle}
             onClick={handlePoll}

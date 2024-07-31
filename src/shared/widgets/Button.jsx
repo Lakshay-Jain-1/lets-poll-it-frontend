@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const Button = (props) => {
   const buttonStyle = {
     backgroundColor: "rgba(0, 191, 111, 0.85)",
@@ -13,7 +12,8 @@ const Button = (props) => {
     cursor: "pointer",
     margin: "30px 30px",
     boxShadow:
-    "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset",
+      "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset",
+    fontFamily: "Poppins",
   };
 
   const hoverStyle = {

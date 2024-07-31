@@ -1,27 +1,22 @@
-
-
-import React ,{useContext} from "react";
+import React, { useContext } from "react";
 import "../../App.css";
 import { Routing } from "../../context/Routing";
 
-
-
 const Header = () => {
-  const {displayLanding,setDisplayLanding}=useContext(Routing)
+  const { displayLanding, setDisplayLanding } = useContext(Routing);
   const headerStyle = {
-    display: displayLanding?"flex":"none",
+    display: displayLanding ? "flex" : "none",
     height: "7vh",
     color: "white",
     fontSize: "2rem",
     fontWeight: 900,
-    margin : "10px",
+    margin: "10px",
   };
 
   const headingStyle = {
     cursor: "pointer",
+    fontFamily: "Poppins",
   };
-
-
 
   return (
     <div style={headerStyle}>

@@ -2,7 +2,8 @@ import React, { createContext, useState } from 'react';
 
 const Routing = createContext();
 
-const RoutingProvider = ({ children }) => {
+const RoutingProvider = ({children}) => {
+  
   const [displayLanding, setDisplayLanding] = useState(true);
   const [displayDashboard, setDisplayDashboard] = useState(false);
   const [displayPoll, setDisplayPoll] = useState(false);

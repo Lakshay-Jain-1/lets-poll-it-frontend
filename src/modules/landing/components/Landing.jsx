@@ -4,9 +4,9 @@ import { Routing } from "../../../context/Routing";
 import { useContext } from "react";
 
 const Landing = () => {
-  const {setDisplayLanding,setDisplayDashboard}=useContext(Routing)
+  const { setDisplayLanding, setDisplayDashboard } = useContext(Routing);
   const landingContainerStyle = {
-    height: "93vh",
+    height: "90vh",
     width: "100%",
     display: "flex",
     flexDirection: "column",
@@ -20,6 +20,7 @@ const Landing = () => {
     textAlign: "center",
     fontSize: "3.7rem",
     fontWeight: 500,
+    fontFamily: "Poppins",
   };
 
   return (
@@ -27,8 +28,14 @@ const Landing = () => {
       <div style={dispContainerStyle}>
         Polls that Matter: Discover What Everyone Thinks!
       </div>
-      <div className="btn-container" onClick={()=>{setDisplayLanding(false); setDisplayDashboard(true) }}>
-        <Button  msg="Explore or Create Your Own Poll" />
+      <div
+        className="btn-container"
+        onClick={() => {
+          setDisplayLanding(false);
+          setDisplayDashboard(true);
+        }}
+      >
+        <Button msg="Explore or Create Your Own Poll" />
       </div>
     </div>
   );
