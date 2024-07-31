@@ -22,5 +22,10 @@ const pollAQuestion = async (question,option)=>{
   return response.data;
 }
 
+const getAQuestionfromitsname =async (question) => {
+  const response = await axios.post(`${import.meta.env.VITE_GETAQUESTIONFROMITSNAME}`, {question});
+  return response.data;
+};
 
-export {getALLQuestion,getAQuestion ,postAQuestion ,pollAQuestion}
+
+export {getALLQuestion,getAQuestion ,postAQuestion ,pollAQuestion ,getAQuestionfromitsname}

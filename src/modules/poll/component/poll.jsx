@@ -1,18 +1,19 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { useEffect } from "react";
-import { pollAQuestion } from "../../../shared/services/api-client";
+import { getAQuestionfromitsname, pollAQuestion } from "../../../shared/services/api-client";
 
 import "../../../stylesheets/Options.css"
-import { Routing } from "../../../context/Routing";
+
 
 export default function Poll() {
-  const {displayPoll} =useContext(Routing)
+ 
   
   const [question, setQuestion] = useState();
   const [option1, setOption1] = useState();
   const [option2, setOption2] = useState();
   const [option3, setOption3] = useState();
   const [option4, setOption4] = useState();
+  const [chartdata,setchartdata] =useState({})
 
   useEffect(() => {
     setQuestion(localStorage.getItem("question"));
@@ -20,14 +21,16 @@ export default function Poll() {
     setOption1(localStorage.getItem("option1"));
     setOption2(localStorage.getItem("option2"));
     setOption3(localStorage.getItem("option3"));
-   localStorage.setItem("poll",true)
+  
     //Don't change this as this is used to find which button is clicked
     document.querySelectorAll("button").forEach((ele) => {
       ele.addEventListener("click", (event) => {
         event.target.setAttribute("clicked", "true");
       });
     });
+    // chartData()
   });
+
 
   function handlePoll() {
     let submit = 0;
@@ -45,7 +48,7 @@ export default function Poll() {
   }
 
   const formStyle = {
-    display:displayPoll?"block":"none",
+    display:"block",
     width: "400px",
     position: "absolute",
     transform: "translate(-50%,-50%)",
@@ -179,6 +182,7 @@ export default function Poll() {
           </button>
         </div>
       </form>
+
     </div>
   );
 }

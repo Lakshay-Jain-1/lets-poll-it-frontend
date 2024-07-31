@@ -2,9 +2,9 @@ import { useState } from 'react';
 import Dashboard from './modules/dashboard/pages/DashBoard';
 import { ChatBox } from './shared/components/ChatBox';
 import LandingPage from './modules/landing/pages/LandingPage';
-import Poll from './modules/poll/pages/poll';
 import { RoutingProvider } from './context/Routing';
 import ParticlesComponent from './modules/particle/components/Particle';
+import LetsPollit from './modules/poll/pages/LetsPollit';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       {/* Route 1 - LandingPage  Route 2 - Dashboard ChatBox  Route 3 - Poll */}
       <LandingPage />
       <Dashboard />
-      <Poll />
+      <LetsPollit />
     </RoutingProvider>
 
     <ParticlesComponent id="particles"/>
