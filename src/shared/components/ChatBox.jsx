@@ -4,7 +4,7 @@ import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
 import AI from "../services/chatgpt";
 
-export default function ChatBox() {
+export  function ChatBox() {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState([]);
   const message = useRef();
@@ -30,7 +30,7 @@ export default function ChatBox() {
   };
 
   const textStyle = {
-    color: "#edf7f3",
+   
     padding: "5px",
     textTransform: "capitalize",
     color: "#262626",
@@ -98,7 +98,7 @@ export default function ChatBox() {
                   cursor: "pointer",
                   position: "absolute",
                   right: "3px",
-                  top: "3px",
+                  top: "0.7px",
                 }}
                 onClick={pushText}
               />
