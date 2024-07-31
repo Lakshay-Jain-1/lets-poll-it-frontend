@@ -1,3 +1,17 @@
-import { createContext } from "react";
+import React, { createContext, useState } from 'react';
 
-export const Routing_landingtoDashboard = createContext()
+const Routing = createContext();
+
+const RoutingProvider = ({ children }) => {
+  const [displayLanding, setDisplayLanding] = useState(true);
+  const [displayDashboard, setDisplayDashboard] = useState(false);
+  const [displayPoll, setDisplayPoll] = useState(false);
+
+  return (
+    <Routing.Provider value={{ displayLanding, setDisplayLanding, displayDashboard, setDisplayDashboard, displayPoll, setDisplayPoll }}>
+      {children}
+    </Routing.Provider>
+  );
+};
+
+export { Routing, RoutingProvider };

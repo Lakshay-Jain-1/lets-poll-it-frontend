@@ -5,9 +5,10 @@ import "../../../stylesheets/Question.css"
 
 function Questions() {
   let [questions, setQuestions] = useState([]);
-
+  let [loading,setLoading] =useState(true)
   const display_all_questions = async () => {
     const data = await getALLQuestion();
+    setLoading(false)
     setQuestions(data);
     return data;
   };
@@ -15,19 +16,17 @@ function Questions() {
     display_all_questions();
   }, []);
 
-  // const style = {
-  //   display: "grid",
-  //   gridTemplateColumns: "auto auto auto",
-  //   rowGap: "40px",
-  //   marginLeft: "8vw",
-  //   marginTop: "8vh",
-  // };
+
   return (
     <div className="second-page">
-      {questions.map((ele, index) => {
+      <h1 style={{display:loading?"block":"none"}}>Loading</h1>
+      {
+      questions.map((ele, index) => {
         const { question } = ele;
         return <QuestionCard key={index} question={question} />;
-      })}
+      })
+      }
+
     </div>
   );
 }

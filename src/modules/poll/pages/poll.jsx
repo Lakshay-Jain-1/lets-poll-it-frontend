@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { pollAQuestion } from "../../../shared/services/api-client";
-import ParticlesComponent from "../../particle/components/Particle";
-import { Margin } from "@mui/icons-material";
+
 import "../../../stylesheets/Options.css"
+import { Routing } from "../../../context/Routing";
 
 export default function Poll() {
+  const {displayPoll} =useContext(Routing)
+  
   const [question, setQuestion] = useState();
   const [option1, setOption1] = useState();
   const [option2, setOption2] = useState();
@@ -18,7 +20,7 @@ export default function Poll() {
     setOption1(localStorage.getItem("option1"));
     setOption2(localStorage.getItem("option2"));
     setOption3(localStorage.getItem("option3"));
-
+   localStorage.setItem("poll",true)
     //Don't change this as this is used to find which button is clicked
     document.querySelectorAll("button").forEach((ele) => {
       ele.addEventListener("click", (event) => {
@@ -43,6 +45,7 @@ export default function Poll() {
   }
 
   const formStyle = {
+    display:displayPoll?"block":"none",
     width: "400px",
     position: "absolute",
     transform: "translate(-50%,-50%)",
@@ -98,7 +101,7 @@ export default function Poll() {
 
   return (
     <div>
-      <ParticlesComponent id="particles" />
+    
       <form onSubmit={(event) => event.preventDefault()} style={formStyle}>
         <h1 style={headingStyle}>{question}</h1>
         <div className="options-grid">

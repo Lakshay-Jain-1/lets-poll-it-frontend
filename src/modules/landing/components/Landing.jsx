@@ -1,7 +1,10 @@
 import React from "react";
 import Button from "../../../shared/widgets/Button.jsx";
+import { Routing } from "../../../context/Routing";
+import { useContext } from "react";
 
 const Landing = () => {
+  const {setDisplayLanding,setDisplayDashboard}=useContext(Routing)
   const landingContainerStyle = {
     height: "93vh",
     width: "100%",
@@ -24,8 +27,8 @@ const Landing = () => {
       <div style={dispContainerStyle}>
         Polls that Matter: Discover What Everyone Thinks!
       </div>
-      <div className="btn-container">
-        <Button msg="Explore or Create Your Own Poll" />
+      <div className="btn-container" onClick={()=>{setDisplayLanding(false); setDisplayDashboard(true) }}>
+        <Button  msg="Explore or Create Your Own Poll" />
       </div>
     </div>
   );

@@ -1,12 +1,15 @@
 
 
-import React from "react";
+import React ,{useContext} from "react";
 import "../../App.css";
+import { Routing } from "../../context/Routing";
+
 
 
 const Header = () => {
+  const {displayLanding,setDisplayLanding}=useContext(Routing)
   const headerStyle = {
-    display: "flex",
+    display: displayLanding?"flex":"none",
     height: "7vh",
     color: "white",
     fontSize: "2rem",

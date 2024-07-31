@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useContext } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,9 +7,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { getAQuestion } from "../../../shared/services/api-client";
+import { Routing } from "../../../context/Routing";
 
 //  this form is used for two things getting a specific question and and for share purposes
 export default function Form({ formdata, visible, setVisible, question }) {
+  
+  const { setDisplayDashboard, setDisplayPoll } = useContext(Routing)
+
   const getQuestion = async (question, password) => {
     const data = await getAQuestion(question, password);
     console.log(data);
@@ -34,8 +38,15 @@ export default function Form({ formdata, visible, setVisible, question }) {
 
     localStorage.setItem("question", question);
 
+    handlingRouting()
+
     handleClose();
   };
+
+  function handlingRouting() {
+    setDisplayDashboard(false)
+    setDisplayPoll(true)
+  }
 
   const dialogStyle = {
     backgroundColor: "#cae8db",
@@ -84,7 +95,7 @@ export default function Form({ formdata, visible, setVisible, question }) {
               color="info"
               name="password"
               fullWidth
-              // autoFocus
+            // autoFocus
             />
           ) : (
             ""
@@ -93,12 +104,12 @@ export default function Form({ formdata, visible, setVisible, question }) {
         <DialogActions style={dialogStyle}>
           <Button
             onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonHoverStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonStyle.backgroundColor)
             }
             style={buttonStyle}
             aria-modal="true"
@@ -108,16 +119,17 @@ export default function Form({ formdata, visible, setVisible, question }) {
           </Button>
           <Button
             onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonHoverStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonStyle.backgroundColor)
             }
             style={buttonStyle}
             aria-modal="true"
             type="submit"
+
           >
             {visible && formdata.button ? formdata.button : ""}
           </Button>

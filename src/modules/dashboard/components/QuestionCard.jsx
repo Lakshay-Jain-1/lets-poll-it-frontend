@@ -7,13 +7,14 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Form from "./Form";
 import FormDialog from "./Form";
+import { Routing } from "../../../context/Routing";
 
 //  as the name suggest it is a single question card  which will get called in questions jsx file
 
 export default function QuestionCard({ question }) {
   const [lock, setLock] = React.useState(false);
   const [data, setData] = React.useState();
-
+  const {setDisplayDashboard, displayPoll} = React.createContext(Routing)
   const shareData = {
     heading: "Share with your friends",
     button: "Share",
