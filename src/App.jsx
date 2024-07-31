@@ -18,12 +18,8 @@ function App() {
       {/* isske dashboard mein star vala diyoo shayyad achha lage   */}
       {/* <Dashboard /> */}
       {/* This Component Css ko sexy kar diyooo */}
-<<<<<<< HEAD
       <ChatBox /> 
         {/* This will go into different Page */}
-=======
-      {/* <ChatBox />   */}
->>>>>>> 5cf4a0f (Added Css in this)
       <Poll/>
     </>
   )

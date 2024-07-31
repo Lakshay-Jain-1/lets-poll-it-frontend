@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import AI from "../services/chatgpt";
 
 
-// Access your API key as an environment variable.
+
 
 export function ChatBox() {
     const [open, setOpen] = useState(false)
