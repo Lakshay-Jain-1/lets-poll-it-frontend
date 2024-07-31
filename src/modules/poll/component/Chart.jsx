@@ -51,7 +51,7 @@ const Chart = ({ object }) => {
       legend: {
         position: "top",
         labels: {
-          color: "#333",
+          color: "whitesmoke",
           font: {
             size: 16,
           },
@@ -65,7 +65,7 @@ const Chart = ({ object }) => {
           family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
           weight: "bold",
         },
-        color: "#333",
+        color: "whitesmoke",
         padding: {
           bottom: 20,
         },
@@ -87,7 +87,7 @@ const Chart = ({ object }) => {
     scales: {
       x: {
         ticks: {
-          color: "#333",
+          color: "whitesmoke",
           font: {
             size: 14,
           },
@@ -98,14 +98,18 @@ const Chart = ({ object }) => {
       },
       y: {
         ticks: {
-          color: "#333",
+          color: "whitesmoke",
           font: {
             size: 14,
           },
+          stepSize: 1, // Ensure the y-axis labels increment by 1
         },
         grid: {
           color: "rgba(0, 0, 0, 0.1)",
         },
+        beginAtZero: true,
+        suggestedMin: 0,
+        suggestedMax: 2,
       },
     },
   };

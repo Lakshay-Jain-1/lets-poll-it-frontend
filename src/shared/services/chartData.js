@@ -8,6 +8,6 @@ export default async function gettingchartData(question) {
         let value = ele["optionSelected"]
         obj[value] = (obj[value] || 0) + 1
     })
-
+    console.log("object",obj)
     return obj
 }

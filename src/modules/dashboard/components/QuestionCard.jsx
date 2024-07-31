@@ -67,7 +67,7 @@ export default function QuestionCard({ question }) {
         onMouseOver={(e) => (e.currentTarget.style.scale = hoverCard.scale)}
         onMouseOut={(e) => (e.currentTarget.style.scale = nonHoverCard.scale)}
         style={cardStyle}
-        sx={{ maxWidth: 315, position: "relative", height: "280px" }}
+        sx={{ maxWidth: 355, position: "relative", height: "340px" }}
       >
         <CardMedia sx={{ height: 140 }} image="./poll1.png" />
         <CardContent>
