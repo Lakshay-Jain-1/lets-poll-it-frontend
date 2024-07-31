@@ -69,7 +69,7 @@ export default function QuestionCard({ question }) {
         style={cardStyle}
         sx={{ maxWidth: 315, position: "relative", height: "280px" }}
       >
-        <CardMedia sx={{ height: 140 }} image="./polls_new.png" />
+        <CardMedia sx={{ height: 140 }} image="./poll1.png" />
         <CardContent>
           <Typography
             style={myStyle}
