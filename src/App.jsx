@@ -12,14 +12,18 @@ function App() {
   return (
     <>
       {/* Ismein apna vala chatbox hatake mere vala ChatBox daal diyooo
-          <LandingPage />    tera component ka maine naam change kar diya tha to landing page 
+            tera component ka maine naam change kar diya tha to landing page 
       */}
-      
+        <LandingPage /> 
       {/* isske dashboard mein star vala diyoo shayyad achha lage   */}
-      <Dashboard />
+      {/* <Dashboard /> */}
       {/* This Component Css ko sexy kar diyooo */}
+<<<<<<< HEAD
       <ChatBox /> 
         {/* This will go into different Page */}
+=======
+      {/* <ChatBox />   */}
+>>>>>>> 5cf4a0f (Added Css in this)
       <Poll/>
     </>
   )

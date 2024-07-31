@@ -1,15 +1,30 @@
+
+
 import React from "react";
-import '../../stylesheets/Header.css'
+import "../../App.css";
+
 
 const Header = () => {
-  return <div className="header">
-    <div className="heading">
-        Let'sPoll.in
+  const headerStyle = {
+    display: "flex",
+    height: "7vh",
+    color: "white",
+    fontSize: "2rem",
+    fontWeight: 900,
+    margin : "10px",
+  };
+
+  const headingStyle = {
+    cursor: "pointer",
+  };
+
+
+
+  return (
+    <div style={headerStyle}>
+      <div style={headingStyle}>Let'sPoll.in</div>
     </div>
-    <div className="user-display">
-        User
-    </div>
-  </div>;
+  );
 };
 
 export default Header;

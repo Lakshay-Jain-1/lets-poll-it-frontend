@@ -1,11 +1,15 @@
-import { useRef, useState } from "react"
+import {  useRef, useState } from "react"
 import ChatIcon from '@mui/icons-material/Chat';
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
+import AI from "../services/chatgpt";
+
+
+// Access your API key as an environment variable.
 
 export function ChatBox() {
     const [open, setOpen] = useState(false)
-    const [text, setText] = useState([])
+    const [text, setText] = useState([])  
     const message = useRef()
     const fixed = {
         position: 'fixed',
@@ -27,12 +31,16 @@ export function ChatBox() {
         bottom: '100px'
     }
 
-    const pushText = () => {
-        let exisiting_text_message = Object.values(text)
+
+    const pushText = async () => {
+        let exisiting_text_message = Object.values(text)  
         exisiting_text_message.push(message.current.value)
-        setText(exisiting_text_message)
+        let data = await AI(message.current.value)
+        exisiting_text_message.push(data) 
+        setText(exisiting_text_message) 
         console.log(text)
     }
+  
 
 
     return (
