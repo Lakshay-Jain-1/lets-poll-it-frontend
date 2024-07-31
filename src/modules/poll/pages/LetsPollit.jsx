@@ -9,7 +9,7 @@ export default function LetsPollit() {
     const { displayPoll } = useContext(Routing)
     const [chartdata, setchartdata] = useState({})
     useEffect(() => {
-        localStorage.setItem("poll", true)
+        
           bardata()
     }, [])
      

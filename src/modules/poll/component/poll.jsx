@@ -39,6 +39,7 @@ export default function Poll() {
       }
      
     });
+    localStorage.setItem("poll", true)
     Texttospeech("Submitted")
   }
 

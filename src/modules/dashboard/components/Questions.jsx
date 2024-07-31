@@ -22,7 +22,7 @@ function Questions() {
   return (
     <div className="second-page">
      
-      {loading ? <h2 style={{ display: loading ? "block" : "none", fontFamily: "Poppins", color: "white", textAlign: "center" }}>Loading..</h2> : questions.map((ele, index) => <QuestionCard key={index} question={ele.question} />)}
+      {loading ? <h2 style={{ display: loading ? "block" : "none", fontFamily: "Poppins", color: "white", textAlign: "center",position:"absolute",top:"35vh",left:"40vw",fontSize:"96px" }}>Loading..........</h2> : questions.map((ele, index) => <QuestionCard key={index} question={ele.question} />)}
 
     </div>
   );
