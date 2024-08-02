@@ -46,11 +46,8 @@ export  function ChatBox() {
   };
 
   const pushText = async () => {
-    let exisiting_text_message = Object.values(text);
-    exisiting_text_message.push(message.current.value);
     let data = await AI(message.current.value);
-    exisiting_text_message.push(data);
-    setText(exisiting_text_message);
+    setText([...text,message.current.value,data]);
     console.log(text);
   };
 
