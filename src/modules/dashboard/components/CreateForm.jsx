@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -9,6 +9,10 @@ import { postAQuestion } from "../../../shared/services/api-client";
 import AI from "../../../shared/services/chatgpt";
 import Texttospeech from "../../../shared/services/texttospeech";
 
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import getLocation from "../../../shared/services/gps";
+
+
 //  this form is used to make a post request that is sending question to the server
 export default function CreateForm({ visible, setVisible, formdata }) {
   const [Aiquestion, setAiquestion] = useState()
@@ -16,6 +20,13 @@ export default function CreateForm({ visible, setVisible, formdata }) {
   const [aioption2, setaiOption2] = useState()
   const [aioption3, setaiOption3] = useState()
   const [aioption4, setaiOption4] = useState()
+  const [xcoords ,setXcoords] =useState()
+  const [ycoords ,setYcoords] =useState()
+
+ 
+
+
+
 
   const handleClose = () => {
     setVisible(false);
@@ -35,11 +46,12 @@ export default function CreateForm({ visible, setVisible, formdata }) {
     handleClose();
   };
   const AIgeneratedPoll = async () => {
-    let prompt = ` Generate a unique  interesting poll question and its corresponding multiple-choice  options in the following  Schema
+    let prompt = ` Generate a unique interesting poll question based on his/her location if not empty ${xcoords}and ${ycoords}   and its corresponding multiple-choice  options in the following  Schema
     {
       "question": String length should be 20,
       "mcq": Array length should be 4
     }`;
+
     Texttospeech("YOUR AI GENERATED POLL")
     const data = await AI(prompt, true)
     const { question, mcq } = JSON.parse(data)
@@ -90,6 +102,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
       >
         <DialogTitle style={dialogTitleStyle}>
           {visible && formdata ? formdata.heading : ""}
+          <div onClick={getLocation}><LocationOnIcon style={{ position: "relative", left: "7vw" }} /></div>
           <img onClick={AIgeneratedPoll} style={{ width: "40px", height: "40px" }} src="./ai.png" />
         </DialogTitle>
 
