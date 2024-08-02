@@ -8,9 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { postAQuestion } from "../../../shared/services/api-client";
 import AI from "../../../shared/services/chatgpt";
 import Texttospeech from "../../../shared/services/texttospeech";
-
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import getLocation from "../../../shared/services/gps";
 
 
 //  this form is used to make a post request that is sending question to the server
@@ -23,7 +21,13 @@ export default function CreateForm({ visible, setVisible, formdata }) {
   const [xcoords ,setXcoords] =useState()
   const [ycoords ,setYcoords] =useState()
 
- 
+  function getLocation() {
+      navigator.geolocation.getCurrentPosition((position)=>{
+        setXcoords(position.coords.latitude)
+        setYcoords(position.coords.longitude)
+      });
+  
+  }
 
 
 
@@ -46,7 +50,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
     handleClose();
   };
   const AIgeneratedPoll = async () => {
-    let prompt = ` Generate a unique interesting poll question based on his/her location if not empty ${xcoords}and ${ycoords}   and its corresponding multiple-choice  options in the following  Schema
+    let prompt = ` Generate a unique interesting poll question based on his/her location if not specified ${xcoords}and ${ycoords}   and its corresponding multiple-choice  options  || You have to give option and question always in the following  Schema
     {
       "question": String length should be 20,
       "mcq": Array length should be 4

@@ -8,6 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { getAQuestion } from "../../../shared/services/api-client";
 import { Routing } from "../../../context/Routing";
+import Texttospeech from "../../../shared/services/texttospeech";
 
 //  this form is used for two things getting a specific question and and for share purposes
 export default function Form({ formdata, visible, setVisible, question }) {
@@ -16,12 +17,14 @@ export default function Form({ formdata, visible, setVisible, question }) {
 
   const getQuestion = async (question, password) => {
     const data = await getAQuestion(question, password);
-    console.log(data);
+    console.log("AI",data);
     if (data.length != 0) {
       localStorage.setItem("option1", data[0].options[0]);
       localStorage.setItem("option2", data[0].options[1]);
       localStorage.setItem("option3", data[0].options[2]);
       localStorage.setItem("option4", data[0].options[3]);
+    }if(data.length==0){
+      Texttospeech("WRONG PASSWORD")
     }
   };
 
