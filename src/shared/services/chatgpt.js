@@ -1,12 +1,13 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-async function AI(data) {
+async function AI(data, json=false) {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GOOGLE_API_KEY);
 
+  let jsonkey =json?{generationConfig: { responseMimeType: "application/json" }}:""; 
+  
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash",...jsonkey });
 
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-  const prompt = `${data} make it very short max to max 4 words`;
+  const prompt = `${data}`;
 
   const result = await model.generateContent([prompt]);
   const response = result.response;

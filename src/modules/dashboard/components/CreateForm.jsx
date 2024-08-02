@@ -6,9 +6,17 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { postAQuestion } from "../../../shared/services/api-client";
+import AI from "../../../shared/services/chatgpt";
+import Texttospeech from "../../../shared/services/texttospeech";
 
 //  this form is used to make a post request that is sending question to the server
 export default function CreateForm({ visible, setVisible, formdata }) {
+  const [Aiquestion, setAiquestion] = useState()
+  const [aioption1, setaiOption1] = useState()
+  const [aioption2, setaiOption2] = useState()
+  const [aioption3, setaiOption3] = useState()
+  const [aioption4, setaiOption4] = useState()
+
   const handleClose = () => {
     setVisible(false);
   };
@@ -26,7 +34,24 @@ export default function CreateForm({ visible, setVisible, formdata }) {
     window.localStorage.setItem("question", question);
     handleClose();
   };
+  const AIgeneratedPoll = async () => {
+    let prompt = ` Generate a unique  interesting poll question and its corresponding multiple-choice  options in the following  Schema
+    {
+      "question": String length should be 20,
+      "mcq": Array length should be 4
+    }`;
+    Texttospeech("YOUR AI GENERATED POLL")
+    const data = await AI(prompt, true)
+    const { question, mcq } = JSON.parse(data)
 
+    const [option1, option2, option3, option4] = mcq
+    setAiquestion(question)
+    setaiOption1(option1)
+    setaiOption2(option2)
+    setaiOption3(option3)
+    setaiOption4(option4)
+
+  }
   const dialogStyle = {
     backgroundColor: "#cae8db",
     fontFamily: "Poppins",
@@ -44,7 +69,9 @@ export default function CreateForm({ visible, setVisible, formdata }) {
   };
 
   const dialogTitleStyle = {
+    display: "flex",
     textAlign: "center",
+    justifyContent: "space-between",
     backgroundColor: "#cae8db",
     fontFamily: "Poppins",
   };
@@ -63,7 +90,9 @@ export default function CreateForm({ visible, setVisible, formdata }) {
       >
         <DialogTitle style={dialogTitleStyle}>
           {visible && formdata ? formdata.heading : ""}
+          <img onClick={AIgeneratedPoll} style={{ width: "40px", height: "40px" }} src="./ai.png" />
         </DialogTitle>
+
         <DialogContent style={dialogStyle}>
           <TextField
             style={dialogStyle}
@@ -73,7 +102,8 @@ export default function CreateForm({ visible, setVisible, formdata }) {
             margin="dense"
             id="question"
             name="question"
-            label="QUESTION"
+            value={Aiquestion || ""}
+
             type="text"
             fullWidth
             variant="standard"
@@ -90,33 +120,37 @@ export default function CreateForm({ visible, setVisible, formdata }) {
             <TextField
               style={dialogOptionStyle}
               autoComplete="off"
-              label="Option 1"
+
               color="secondary"
+              value={aioption1 || ""}
               // autoFocus
               name="Option1"
             />
             <TextField
               style={dialogOptionStyle}
               autoComplete="off"
-              label="Option 2"
+
               color="secondary"
+              value={aioption2 || ""}
               // autoFocus
               name="Option2"
             />
             <TextField
               style={dialogOptionStyle}
               autoComplete="off"
-              label="Option 3"
+
               color="secondary"
+              value={aioption3 || ""}
               // autoFocus
               name="Option3"
             />
             <TextField
               style={dialogOptionStyle}
               autoComplete="off"
-              label="Option 4"
+
               color="secondary"
               // autoFocus
+              value={aioption4 || ""}
               name="Option4"
             />
           </div>
@@ -135,18 +169,18 @@ export default function CreateForm({ visible, setVisible, formdata }) {
             type="password"
             color="info"
             name="password"
-            // autoFocus
+          // autoFocus
           />
         </DialogContent>
         <DialogActions style={dialogStyle}>
           <Button
             onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonHoverStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonStyle.backgroundColor)
             }
             style={buttonStyle}
             aria-modal="true"
@@ -156,12 +190,12 @@ export default function CreateForm({ visible, setVisible, formdata }) {
           </Button>
           <Button
             onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonHoverStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonStyle.backgroundColor)
             }
             style={buttonStyle}
             aria-modal="true"

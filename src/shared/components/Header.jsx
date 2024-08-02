@@ -21,6 +21,7 @@ const Header = () => {
   return (
     <div style={headerStyle}>
       <div style={headingStyle}>Let'sPoll.in</div>
+      
     </div>
   );
 };
