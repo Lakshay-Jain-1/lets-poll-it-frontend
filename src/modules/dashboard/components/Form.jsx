@@ -6,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import QRCode from "react-qr-code";
 import { getAQuestion } from "../../../shared/services/api-client";
 import { Routing } from "../../../context/Routing";
 import Texttospeech from "../../../shared/services/texttospeech";
@@ -80,7 +81,7 @@ export default function Form({ formdata, visible, setVisible, question }) {
         </DialogTitle>
         <DialogContent style={dialogStyle}>
           <DialogContentText>
-            {/* To Access the Poll, please enter the password to unlock this poll */}
+          {visible && formdata.button=="Share"?<QRCode style={{width:"120px",height:"120px"}} value="https://polling-frontend-97zb.onrender.com/" />:""}
           </DialogContentText>
 
           {visible && formdata.input ? (
