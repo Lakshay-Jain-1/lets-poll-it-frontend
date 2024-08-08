@@ -103,6 +103,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
         open={visible || false}
         onClose={handleClose}
         PaperProps={{ component: "form", onSubmit: handleSubmit }}
+        style={{  backdropFilter: "saturate(3)"}}
       >
         <DialogTitle style={dialogTitleStyle}>
           {visible && formdata ? formdata.heading : ""}

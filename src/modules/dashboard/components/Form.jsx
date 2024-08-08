@@ -56,6 +56,7 @@ export default function Form({ formdata, visible, setVisible, question }) {
     backgroundColor: "#cae8db",
     fontFamily: "Poppins",
     textAlign: "center",
+    
   };
 
   const buttonStyle = {
@@ -75,6 +76,7 @@ export default function Form({ formdata, visible, setVisible, question }) {
         open={visible || false}
         onClose={handleClose}
         PaperProps={{ component: "form", onSubmit: handleSubmit }}
+        style={{  backdropFilter: "saturate(3)"}}
       >
         <DialogTitle style={dialogStyle}>
           {visible && formdata ? formdata.heading : ""}
