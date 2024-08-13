@@ -18,12 +18,12 @@ export default function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-         console.log("dasjsd",data.get("password"))
+         console.log("dasjsd / signup",data.get("signuppassword"))
          let name = data.get('name')
-         let password = data.get('password')
+         let password = data.get('signuppassword')
          console.log("name",name)
          console.log("password",password)
-        handlingSignIn(data.get('name'),data.get('password'))
+        handlingSignIn(data.get('name'),data.get('signuppassword'))
         setSignup(false)
         setDisplayLanding(true)
     };
@@ -45,7 +45,7 @@ export default function SignUp() {
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
                     <TextField sx={{ input: { color: 'whitesmoke' } }} InputLabelProps={{style: { color: '#fff' }}} margin="normal" required fullWidth  label="Enter your name" name="name" autoComplete="off" autoFocus />
-                    <TextField  sx={{ input: { color: 'whitesmoke' } }} InputLabelProps={{style: { color: '#fff' }}}  margin="normal" required fullWidth  label="Password" type="password" name="password"  autoComplete="current-password" />
+                    <TextField  sx={{ input: { color: 'whitesmoke' } }} InputLabelProps={{style: { color: '#fff' }}}  margin="normal" required fullWidth  label="Password" type="password" name="signuppassword"  autoComplete="current-password" />
                  
                     <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 ,bgcolor: '#3B634F' }}>Sign Up</Button>
                     <Grid container>

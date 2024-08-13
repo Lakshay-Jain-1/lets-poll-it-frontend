@@ -17,11 +17,12 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('name'),
-      password: data.get('password'),
-    });
-    loginuser(data.get('name'),data.get('password'))
+    
+    let name = data.get('name')
+    let password = data.get('password')
+    console.log("name",name)
+    console.log("password",password)
+    loginuser(name,password)
     setLogin(false)
     
   };
