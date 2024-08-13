@@ -18,7 +18,11 @@ export default function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-       
+         console.log("dasjsd",data.get("password"))
+         let name = data.get('name')
+         let password = data.get('password')
+         console.log("name",name)
+         console.log("password",password)
         handlingSignIn(data.get('name'),data.get('password'))
         setSignup(false)
         setDisplayLanding(true)
@@ -47,7 +51,7 @@ export default function SignUp() {
                     <Grid container>
                         <Grid item>
                           <Button style={{color:"whitesmoke",backgroundColor:"#3B634F"}} onClick={()=>{setSignup(false); setLogin(true)}}> 
-                            <Link style={{color:"whitesmoke"}} href="#" variant="body2">{" Have an account? Just Login"}</Link> 
+                           {" Have an account? Just Login"}
                             </Button> 
                         </Grid>
                     </Grid>
