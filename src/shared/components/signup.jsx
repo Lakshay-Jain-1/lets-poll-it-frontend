@@ -41,7 +41,7 @@ export default function SignUp() {
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
                     <TextField sx={{ input: { color: 'whitesmoke' } }} InputLabelProps={{style: { color: '#fff' }}} margin="normal" required fullWidth  label="Enter your name" name="name" autoComplete="off" autoFocus />
-                    <TextField  sx={{ input: { color: 'whitesmoke' } }} InputLabelProps={{style: { color: '#fff' }}}  margin="normal" required fullWidth  label="Password" type="password" id="password" autoComplete="current-password" />
+                    <TextField  sx={{ input: { color: 'whitesmoke' } }} InputLabelProps={{style: { color: '#fff' }}}  margin="normal" required fullWidth  label="Password" type="password" name="password"  autoComplete="current-password" />
                  
                     <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 ,bgcolor: '#3B634F' }}>Sign Up</Button>
                     <Grid container>
