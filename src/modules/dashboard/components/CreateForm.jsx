@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -9,6 +9,7 @@ import { postAQuestion } from "../../../shared/services/api-client";
 import AI from "../../../shared/services/chatgpt";
 import Texttospeech from "../../../shared/services/texttospeech";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Routing } from "../../../context/Routing";
 
 
 //  this form is used to make a post request that is sending question to the server
@@ -20,6 +21,8 @@ export default function CreateForm({ visible, setVisible, formdata }) {
   const [aioption4, setaiOption4] = useState()
   const [xcoords ,setXcoords] =useState()
   const [ycoords ,setYcoords] =useState()
+
+  const { setDisplayDashboard, setDisplayPoll, login, setLogin, setDisplayLanding } = useContext(Routing)
 
   function getLocation() {
       navigator.geolocation.getCurrentPosition((position)=>{
@@ -41,11 +44,17 @@ export default function CreateForm({ visible, setVisible, formdata }) {
     const formData = new FormData(event.currentTarget);
     const formJson = Object.fromEntries(formData.entries());
     const { password, Option1, Option2, Option3, Option4, question } = formJson;
-    await postAQuestion(
+    let data  = await postAQuestion(
       question,
       [Option1, Option2, Option3, Option4],
       password
     );
+    if (data.authorization == false) {
+      setLogin(true)
+      setDisplayDashboard(false)
+      handleClose();
+      return
+    }
     window.localStorage.setItem("question", question);
     handleClose();
   };
@@ -120,7 +129,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
             margin="dense"
             id="question"
             name="question"
-            value={Aiquestion || ""}
+            defaultValue={Aiquestion || ""}
 
             type="text"
             fullWidth
@@ -140,7 +149,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
               autoComplete="off"
 
               color="secondary"
-              value={aioption1 || ""}
+              defaultValue={aioption1 || ""}
               // autoFocus
               name="Option1"
             />
@@ -149,7 +158,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
               autoComplete="off"
 
               color="secondary"
-              value={aioption2 || ""}
+              defaultValue={aioption2 || ""}
               // autoFocus
               name="Option2"
             />
@@ -158,7 +167,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
               autoComplete="off"
 
               color="secondary"
-              value={aioption3 || ""}
+              defaultValue={aioption3 || ""}
               // autoFocus
               name="Option3"
             />
@@ -168,7 +177,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
 
               color="secondary"
               // autoFocus
-              value={aioption4 || ""}
+              defaultValue={aioption4 || ""}
               name="Option4"
             />
           </div>

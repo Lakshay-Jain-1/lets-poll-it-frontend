@@ -4,6 +4,8 @@ import LandingPage from './modules/landing/pages/LandingPage';
 import { RoutingProvider } from './context/Routing';
 import ParticlesComponent from './modules/particle/components/Particle';
 import LetsPollit from './modules/poll/pages/LetsPollit';
+import Login from './shared/components/login';
+import SignUp from './shared/components/signup';
 
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
 
       <RoutingProvider>
         {/* Route 1 - LandingPage  Route 2 - Dashboard ChatBox  Route 3 - Poll */}
+        <Login/>
+        <SignUp/>
         <LandingPage />
         <Dashboard />
         <LetsPollit />

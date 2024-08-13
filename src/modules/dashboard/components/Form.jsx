@@ -13,18 +13,28 @@ import Texttospeech from "../../../shared/services/texttospeech";
 
 //  this form is used for two things getting a specific question and and for share purposes
 export default function Form({ formdata, visible, setVisible, question }) {
-  
-  const { setDisplayDashboard, setDisplayPoll } = useContext(Routing)
+
+  const { setDisplayDashboard, setDisplayPoll, login, setLogin, setDisplayLanding } = useContext(Routing)
 
   const getQuestion = async (question, password) => {
     const data = await getAQuestion(question, password);
-    console.log("AI",data);
+    console.log(data)
+
+    if (data.authorization == false) {
+      console.log("will navigate to login page")
+      setLogin(true)
+      setDisplayDashboard(false)
+      return
+    }
     if (data.length != 0) {
+      localStorage.setItem("question", question);
       localStorage.setItem("option1", data[0].options[0]);
       localStorage.setItem("option2", data[0].options[1]);
       localStorage.setItem("option3", data[0].options[2]);
       localStorage.setItem("option4", data[0].options[3]);
-    }if(data.length==0){
+      handlingRouting()
+    
+    } if (data.length == 0) {
       Texttospeech("WRONG PASSWORD")
     }
   };
@@ -39,12 +49,9 @@ export default function Form({ formdata, visible, setVisible, question }) {
     const formJson = Object.fromEntries(formData.entries());
     const password = formJson.password;
     await getQuestion(question, password);
-
-    localStorage.setItem("question", question);
-
-    handlingRouting()
-
+ 
     handleClose();
+
   };
 
   function handlingRouting() {
@@ -56,7 +63,7 @@ export default function Form({ formdata, visible, setVisible, question }) {
     backgroundColor: "#cae8db",
     fontFamily: "Poppins",
     textAlign: "center",
-    
+
   };
 
   const buttonStyle = {
@@ -76,14 +83,14 @@ export default function Form({ formdata, visible, setVisible, question }) {
         open={visible || false}
         onClose={handleClose}
         PaperProps={{ component: "form", onSubmit: handleSubmit }}
-        style={{  backdropFilter: "saturate(3)"}}
+        style={{ backdropFilter: "saturate(3)" }}
       >
         <DialogTitle style={dialogStyle}>
           {visible && formdata ? formdata.heading : ""}
         </DialogTitle>
         <DialogContent style={dialogStyle}>
           <DialogContentText>
-          {visible && formdata.button=="Share"?<QRCode style={{width:"120px",height:"120px"}} value="https://polling-frontend-97zb.onrender.com/" />:""}
+            {visible && formdata.button == "Share" ? <QRCode style={{ width: "120px", height: "120px" }} value="https://polling-frontend-97zb.onrender.com/" /> : ""}
           </DialogContentText>
 
           {visible && formdata.input ? (
@@ -95,6 +102,7 @@ export default function Form({ formdata, visible, setVisible, question }) {
                 fontFamily: "Poppins",
                 boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
               }}
+              autoComplete="on"
               autoFocus
               label="Password"
               type="password"
