@@ -11,6 +11,10 @@ async function AI(data, json=false) {
 
   const result = await model.generateContent([prompt]);
   const response = result.response;
+  if(json){
+   const jsonData = response.json()
+   return jsonData
+  }
   const text = response.text();
   console.log(text);
   return text;
