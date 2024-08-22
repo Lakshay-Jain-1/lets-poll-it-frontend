@@ -14,11 +14,11 @@ import { Routing } from "../../../context/Routing";
 
 //  this form is used to make a post request that is sending question to the server
 export default function CreateForm({ visible, setVisible, formdata }) {
-  const [Aiquestion, setAiquestion] = useState()
-  const [aioption1, setaiOption1] = useState()
-  const [aioption2, setaiOption2] = useState()
-  const [aioption3, setaiOption3] = useState()
-  const [aioption4, setaiOption4] = useState()
+  const [Aiquestion, setAiquestion] = useState("")
+  const [aioption1, setaiOption1] = useState("")
+  const [aioption2, setaiOption2] = useState("")
+  const [aioption3, setaiOption3] = useState("")
+  const [aioption4, setaiOption4] = useState("")
   const [xcoords ,setXcoords] =useState()
   const [ycoords ,setYcoords] =useState()
 
