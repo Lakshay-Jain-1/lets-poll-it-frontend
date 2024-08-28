@@ -4,6 +4,7 @@ import { pollAQuestion } from "../../../shared/services/api-client";
 
 import "../../../stylesheets/Options.css";
 import Texttospeech from "../../../shared/services/texttospeech";
+import handleDownloadPoll from "../../../shared/services/downloadPoll";
 
 export default function Poll() {
   const [question, setQuestion] = useState();
@@ -77,6 +78,20 @@ export default function Poll() {
     border: "1px solid rgba(0, 191, 111)",
   };
 
+  const downloadButtonStyle = {
+    height: "35px",
+    alignSelf: "center",
+    color: "white",
+    borderRadius: "10px",
+    backgroundColor: "rgba(0, 191, 111, 0.85)",
+    boxShadow:
+      "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset",
+    fontSize: "1rem",
+    cursor: "pointer",
+    border: "1px solid rgba(0, 191, 111)",
+    padding: "5px 10px",
+  };
+
   const submitButtonStyle = {
     height: "35px",
     alignSelf: "center",
@@ -141,8 +156,15 @@ export default function Poll() {
     left: "30%",
   };
 
+  const downloadDivStyle = {
+    display: "inline",
+    position: "absolute",
+    right: "5%",
+    top: "5%",
+  };
+
   return (
-    <div style={{ fontFamily: "Poppins" }}>
+    <div id="content-to-pdf" style={{ fontFamily: "Poppins" }}>
       <button
         onClick={(e) => window.location.reload()}
         onMouseOver={(e) =>
@@ -240,6 +262,23 @@ export default function Poll() {
           </button>
         </div>
       </form>
+      <div style={downloadDivStyle}>
+        <button
+          onClick={() =>
+            handleDownloadPoll(question, option1, option2, option3, option4)
+          }
+          onMouseOver={(e) =>
+            (e.currentTarget.style.backgroundColor = hoverStyle.backgroundColor)
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.backgroundColor =
+              downloadButtonStyle.backgroundColor)
+          }
+          style={downloadButtonStyle}
+        >
+          Download Poll
+        </button>
+      </div>
     </div>
   );
 }
