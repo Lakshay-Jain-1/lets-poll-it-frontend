@@ -67,7 +67,9 @@ export default function CreateForm({ visible, setVisible, formdata }) {
 
     Texttospeech("YOUR AI GENERATED POLL")
     const data = await AI(prompt, true)
-    const { question, mcq } = data
+   
+    const { question, mcq } = JSON.parse(data)  
+    
 
     const [option1, option2, option3, option4] = mcq
     setAiquestion(question)
@@ -129,7 +131,8 @@ export default function CreateForm({ visible, setVisible, formdata }) {
             margin="dense"
             id="question"
             name="question"
-            defaultValue={Aiquestion || ""}
+            value={Aiquestion} 
+            onChange={(e) => setAiquestion(e.target.value)}  
 
             type="text"
             fullWidth
@@ -149,8 +152,8 @@ export default function CreateForm({ visible, setVisible, formdata }) {
               autoComplete="off"
 
               color="secondary"
-              defaultValue={aioption1 || ""}
-              // autoFocus
+              value={aioption1}
+              onChange={(e) => setaiOption1(e.target.value)} 
               name="Option1"
             />
             <TextField
@@ -158,8 +161,8 @@ export default function CreateForm({ visible, setVisible, formdata }) {
               autoComplete="off"
 
               color="secondary"
-              defaultValue={aioption2 || ""}
-              // autoFocus
+              value={aioption2}
+              onChange={(e) => setaiOption2(e.target.value)} 
               name="Option2"
             />
             <TextField
@@ -167,8 +170,8 @@ export default function CreateForm({ visible, setVisible, formdata }) {
               autoComplete="off"
 
               color="secondary"
-              defaultValue={aioption3 || ""}
-              // autoFocus
+              value={aioption3}
+              onChange={(e) => setaiOption3(e.target.value)} 
               name="Option3"
             />
             <TextField
@@ -177,7 +180,8 @@ export default function CreateForm({ visible, setVisible, formdata }) {
 
               color="secondary"
               // autoFocus
-              defaultValue={aioption4 || ""}
+              value={aioption4}
+              onChange={(e) => setaiOption4(e.target.value)} 
               name="Option4"
             />
           </div>
