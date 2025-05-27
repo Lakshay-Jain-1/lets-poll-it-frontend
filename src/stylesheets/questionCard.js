@@ -40,6 +40,7 @@
     buttonStyle,
     buttonHoverStyle,
     cardStyle,
-    myStyle
+    myStyle,
+    hoverQuestionStyle
   };
   

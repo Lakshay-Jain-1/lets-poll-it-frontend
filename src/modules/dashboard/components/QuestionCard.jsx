@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Form from "./Form";
 import { Routing } from "../../../context/Routing";
-import {nonHoverCard,hoverCard,buttonStyle,buttonHoverStyle,cardStyle,myStyle} from "../../../stylesheets/questionCard.js"
+import {nonHoverCard,hoverCard,buttonStyle,buttonHoverStyle,cardStyle,myStyle,hoverQuestionStyle} from "../../../stylesheets/questionCard.js"
 
 //  as the name suggest it is a single question card  which will get called in questions jsx file
 
