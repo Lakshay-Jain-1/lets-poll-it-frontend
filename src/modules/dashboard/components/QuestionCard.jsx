@@ -20,7 +20,7 @@ export default function QuestionCard({ question }) {
     button: "Share",
   };
   const unlockData = {
-    heading: "Unlock it to play",
+    heading: "Enter the password to unlock and play (Try: admin)",
     button: "UNLOCK",
     input: [1],
   };
