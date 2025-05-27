@@ -17,11 +17,8 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    
     let name = data.get('name')
     let password = data.get('password')
-    console.log("name",name)
-    console.log("password",password)
     loginuser(name,password)
     setLogin(false)
     
@@ -31,12 +28,10 @@ export default function Login() {
      let res = await LoginUSER(name,password)
      if(Cookies.get("success")){
       alert("You don't have an account")
-     
       setSignup(true)
      }else{
       setDisplayLanding(true)
      }
-
      }catch(err){
       console.log(err)
      }

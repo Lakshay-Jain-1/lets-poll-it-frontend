@@ -31,6 +31,7 @@ const postAQuestion = async (question,options,password)=>{
 }
 
 const pollAQuestion = async (question,option)=>{
+  console.log("option",option)
   const response = await axios.post(`${import.meta.env.VITE_UPDATEAPOLL}`, {question,option},{withCredentials:true});
   return response.data;
 }

@@ -1,4 +1,4 @@
-import { React, useContext, useEffect, useState } from "react";
+import {  useContext,  useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -10,7 +10,7 @@ import AI from "../../../shared/services/chatgpt";
 import Texttospeech from "../../../shared/services/texttospeech";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Routing } from "../../../context/Routing";
-
+import { dialogOptionStyle,dialogTitleStyle,buttonStyle,buttonHoverStyle,dialogStyle} from "../../../stylesheets/createForm.js"
 
 //  this form is used to make a post request that is sending question to the server
 export default function CreateForm({ visible, setVisible, formdata }) {
@@ -22,7 +22,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
   const [xcoords ,setXcoords] =useState()
   const [ycoords ,setYcoords] =useState()
 
-  const { setDisplayDashboard, setDisplayPoll, login, setLogin, setDisplayLanding } = useContext(Routing)
+  const { setDisplayDashboard, setLogin } = useContext(Routing)
 
   function getLocation() {
       navigator.geolocation.getCurrentPosition((position)=>{
@@ -31,10 +31,6 @@ export default function CreateForm({ visible, setVisible, formdata }) {
       });
   
   }
-
-
-
-
   const handleClose = () => {
     setVisible(false);
   };
@@ -67,10 +63,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
 
     Texttospeech("YOUR AI GENERATED POLL")
     const data = await AI(prompt, true)
-   
     const { question, mcq } = JSON.parse(data)  
-    
-
     const [option1, option2, option3, option4] = mcq
     setAiquestion(question)
     setaiOption1(option1)
@@ -79,35 +72,6 @@ export default function CreateForm({ visible, setVisible, formdata }) {
     setaiOption4(option4)
 
   }
-  const dialogStyle = {
-    backgroundColor: "#cae8db",
-    fontFamily: "Poppins",
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#cae8db",
-    fontFamily: "Poppins",
-    color: "#275944",
-    fontWeight: "bold",
-  };
-
-  const buttonHoverStyle = {
-    backgroundColor: "#83c8ac",
-  };
-
-  const dialogTitleStyle = {
-    display: "flex",
-    textAlign: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#cae8db",
-    fontFamily: "Poppins",
-  };
-
-  const dialogOptionStyle = {
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    backgroundColor: "#cae8db",
-    fontFamily: "Poppins",
-  };
   return (
     <>
       <Dialog

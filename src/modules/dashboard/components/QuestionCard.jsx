@@ -6,15 +6,15 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Form from "./Form";
-import FormDialog from "./Form";
 import { Routing } from "../../../context/Routing";
+import {nonHoverCard,hoverCard,buttonStyle,buttonHoverStyle,cardStyle,myStyle} from "../../../stylesheets/questionCard.js"
 
 //  as the name suggest it is a single question card  which will get called in questions jsx file
 
 export default function QuestionCard({ question }) {
   const [lock, setLock] = React.useState(false);
   const [data, setData] = React.useState();
-  const {setDisplayDashboard, displayPoll} = React.createContext(Routing)
+  const { setDisplayDashboard, displayPoll } = React.createContext(Routing)
   const shareData = {
     heading: "Share with your friends",
     button: "Share",
@@ -23,42 +23,6 @@ export default function QuestionCard({ question }) {
     heading: "Unlock it to play",
     button: "UNLOCK",
     input: [1],
-  };
-
-  const myStyle = {
-    textAlign: "center",
-    fontWeight: 400,
-    fontFamily: "Poppins",
-  };
-
-  const cardStyle = {
-    borderRadius: "10px",
-    backgroundColor: "#cae8db",
-    boxShadow:
-      "  rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
-  };
-
-  const hoverQuestionStyle = {
-    fontWeight: 500,
-  };
-
-  const hoverCard = {
-    scale: 1.03,
-  };
-
-  const nonHoverCard = {
-    scale: 1.0,
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#cae8db",
-    fontFamily: "Poppins",
-    color: "#275944",
-    fontWeight: "bold",
-  };
-
-  const buttonHoverStyle = {
-    backgroundColor: "#83c8ac",
   };
 
   return (
@@ -90,12 +54,12 @@ export default function QuestionCard({ question }) {
           <Button
             style={buttonStyle}
             onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonHoverStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonStyle.backgroundColor)
             }
             aria-modal="true"
             size="small"
@@ -109,12 +73,12 @@ export default function QuestionCard({ question }) {
           <Button
             style={buttonStyle}
             onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonHoverStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
+            (e.currentTarget.style.backgroundColor =
+              buttonStyle.backgroundColor)
             }
             aria-modal="true"
             size="small"

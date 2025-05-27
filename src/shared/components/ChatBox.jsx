@@ -48,7 +48,6 @@ export  function ChatBox() {
   const pushText = async () => {
     let data = await AI(`${message.current.value} make it very short max to max 4 words`);
     setText([...text,message.current.value,data]);
-    console.log(text);
   };
 
   return (

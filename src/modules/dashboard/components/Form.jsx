@@ -10,15 +10,13 @@ import QRCode from "react-qr-code";
 import { getAQuestion } from "../../../shared/services/api-client";
 import { Routing } from "../../../context/Routing";
 import Texttospeech from "../../../shared/services/texttospeech";
-
+import {buttonStyle, buttonHoverStyle, dialogStyle} from "../../../stylesheets/Form.js"
 //  this form is used for two things getting a specific question and and for share purposes
+
 export default function Form({ formdata, visible, setVisible, question }) {
-
   const { setDisplayDashboard, setDisplayPoll, login, setLogin, setDisplayLanding } = useContext(Routing)
-
   const getQuestion = async (question, password) => {
     const data = await getAQuestion(question, password);
-    console.log(data)
 
     if (data.authorization == false) {
       console.log("will navigate to login page")
@@ -49,33 +47,13 @@ export default function Form({ formdata, visible, setVisible, question }) {
     const formJson = Object.fromEntries(formData.entries());
     const password = formJson.password;
     await getQuestion(question, password);
- 
     handleClose();
-
   };
 
   function handlingRouting() {
     setDisplayDashboard(false)
     setDisplayPoll(true)
   }
-
-  const dialogStyle = {
-    backgroundColor: "#cae8db",
-    fontFamily: "Poppins",
-    textAlign: "center",
-
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#cae8db",
-    fontFamily: "Poppins",
-    color: "#275944",
-    fontWeight: "bold",
-  };
-
-  const buttonHoverStyle = {
-    backgroundColor: "#83c8ac",
-  };
 
   return (
     <>

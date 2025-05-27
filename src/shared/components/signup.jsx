@@ -18,11 +18,8 @@ export default function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-         console.log("dasjsd / signup",data.get("signuppassword"))
          let name = data.get('name')
          let password = data.get('signuppassword')
-         console.log("name",name)
-         console.log("password",password)
         handlingSignIn(data.get('name'),data.get('signuppassword'))
         setSignup(false)
         setDisplayLanding(true)
