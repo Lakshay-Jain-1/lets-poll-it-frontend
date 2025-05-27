@@ -11,8 +11,8 @@ const refreshButtonStyle = {
   border: "1px solid rgba(0, 191, 111)",
   width: "150px",
   position: "absolute",
-  top: "-40%",
-  right: "50%",
+  top: "-15%",
+  right: "0%",
 };
 
 const divStyle = {

@@ -17,7 +17,7 @@
   };
 
   const buttonStyle = {
-    height: "35px",
+    height: "45px",
     alignSelf: "center",
     color: "white",
     borderRadius: "10px",
@@ -30,7 +30,7 @@
   };
 
   const downloadButtonStyle = {
-    height: "35px",
+    height: "43px",
     alignSelf: "center",
     color: "white",
     borderRadius: "10px",
@@ -83,15 +83,16 @@
     border: "1px solid rgba(0, 191, 111)",
     width: "100px",
     position: "absolute",
-    top: "15%",
+    top: "10%",
     left: "30%",
   };
 
   const downloadDivStyle = {
+    
     display: "inline",
     position: "absolute",
-    right: "5%",
-    top: "5%",
+    right: "30%",
+    top: "11%",
   };
 
 export {downloadButtonStyle,downloadDivStyle,backButtonStyle,buttonStyle,formStyle,submitButtonStyle,hoverStyle,headingStyle,divStyle}
