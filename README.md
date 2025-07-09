@@ -31,8 +31,7 @@
 - **Authentication**: JWT (stateless)  
 - **AI Integration**: Gemini API  
 - **Charting Library**: Chart.js  
-- **Database**: MongoDB / PostgreSQL *(update based on your choice)*
-
+- **Database**: MongoDB
 ---
 
 ## How It Works
