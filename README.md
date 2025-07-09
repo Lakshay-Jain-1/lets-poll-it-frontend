@@ -1,8 +1,47 @@
-# React + Vite
+# Let's Poll It
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Let's Poll It** is a modern, AI-powered polling platform where users can create and participate in polls after authentication. It features stateless authentication, AI-generated location-based polls, and clean data visualizations using Chart.js.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- **User Authentication**
+  - Secure, stateless authentication system using JWT.
+  - Users can create and vote on polls only after login.
+
+- **Create & Share Polls**
+  - Users can generate polls with unique keys.
+  - Simple and intuitive UI for poll creation and sharing.
+
+- **AI-Generated Location-Based Polls**
+  - Integrated AI (via Gemini API) to suggest polls based on user location or trends.
+  - Increases engagement by making polls relevant and contextual.
+
+- **Data Visualization**
+  - Uses Chart.js to display poll results as interactive charts.
+  - Helps users understand voting trends at a glance.
+
+---
+
+## Tech Stack
+
+- **Frontend**: React  
+- **Backend**: Express.js  
+- **Authentication**: JWT (stateless)  
+- **AI Integration**: Gemini API  
+- **Charting Library**: Chart.js  
+- **Database**: MongoDB / PostgreSQL *(update based on your choice)*
+
+---
+
+## How It Works
+
+1. User logs in and receives a JWT token.
+2. Authenticated user creates a poll and gets a unique key.
+3. Other users access the poll via the key and vote.
+4. Responses are stored securely and visualized via Chart.js.
+
+---
+
+
