@@ -22,7 +22,7 @@ export default function ChartModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { displayPoll } = useContext(Routing);
+  const { displayPoll } = React.useContext(Routing);
 
   return (
     <>
