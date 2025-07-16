@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import Chart from "../component/Chart";
 import Poll from "../component/poll";
 import { Routing } from "../../../context/Routing";
+import ChartModal from "../component/ChartModal";
 
 
 export default function LetsPollit() {
@@ -9,7 +9,7 @@ export default function LetsPollit() {
     return (
         <div style={{ display: displayPoll ? "block" : "none" }}>
             <Poll />
-            <Chart  />
-        </div>
+            <ChartModal/>
+        </div>  
     )
 }

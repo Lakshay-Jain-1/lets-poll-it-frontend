@@ -2,10 +2,10 @@ import Dashboard from './modules/dashboard/pages/DashBoard';
 import { ChatBox } from './shared/components/ChatBox';
 import LandingPage from './modules/landing/pages/LandingPage';
 import { RoutingProvider } from './context/Routing';
-import ParticlesComponent from './modules/particle/components/Particle';
 import LetsPollit from './modules/poll/pages/LetsPollit';
 import Login from './shared/components/login';
 import SignUp from './shared/components/signup';
+import ParticlesComponent from './shared/components/Particle';
 
 
 function App() {

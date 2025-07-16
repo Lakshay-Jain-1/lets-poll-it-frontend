@@ -14,7 +14,6 @@ export  function ChatBox() {
     right: "19px",
     width: "50px",
     height: "50px",
-
     zIndex: 1,
   };
   const absolute = {
