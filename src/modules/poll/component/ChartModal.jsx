@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Chart from './Chart';
+import { Routing } from '../../../context/Routing';
 
 const style = {
   position: 'absolute',
@@ -21,9 +22,16 @@ export default function ChartModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const { displayPoll } = useContext(Routing);
+
   return (
-    <div>
-      <Button onClick={handleOpen}>See what others selected</Button>
+    <>
+      {/* Only hide the button, not the Modal itself */}
+      {displayPoll && (
+        <Button onClick={handleOpen}>See what others selected</Button>
+      )}
+      
+      {/* Modal is always mounted so it can appear properly */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -31,9 +39,9 @@ export default function ChartModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <Chart/>
+          <Chart />
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }

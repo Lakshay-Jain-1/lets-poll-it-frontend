@@ -7,9 +7,11 @@ import ChartModal from "../component/ChartModal";
 export default function LetsPollit() {
     const { displayPoll } = useContext(Routing)
     return (
+        <>
         <div style={{ display: displayPoll ? "block" : "none" }}>
-            <Poll />
-            <ChartModal/>
-        </div>  
+            <Poll /> 
+        </div> 
+        <ChartModal/>
+        </> 
     )
 }
