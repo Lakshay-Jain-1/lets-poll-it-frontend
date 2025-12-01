@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
 import "../../App.css";
-import { Routing } from "../../context/Routing";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
-  const { displayLanding, setDisplayLanding } = useContext(Routing);
+  const location = useLocation();
+
+  // Hide header on login and signup page
+  const hideRoutes = ["/login", "/signup"];
+  const isHidden = hideRoutes.includes(location.pathname);
+
   const headerStyle = {
-    display: displayLanding ? "flex" : "none",
+    display: isHidden ? "none" : "flex",
     height: "7vh",
     color: "white",
     fontSize: "2rem",
@@ -21,7 +25,6 @@ const Header = () => {
   return (
     <div style={headerStyle}>
       <div style={headingStyle}>Let'sPoll.in</div>
-      
     </div>
   );
 };

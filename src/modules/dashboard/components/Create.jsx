@@ -1,12 +1,13 @@
+// Create.jsx
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
-import Form from "./Form";
 import { useState } from "react";
 import CreateForm from "./CreateForm";
 
 export const Create = () => {
   const [visible, setVisible] = useState(false);
+
   const shareData = {
     heading: "Create A Question",
     button: "Create",
@@ -15,27 +16,30 @@ export const Create = () => {
 
   return (
     <>
-      <Box sx={{ "& > :not(style)": { m: 1, backgroundColor: "white" } }}>
+      <Box
+        sx={{
+          position: "fixed",
+          right: "30px",
+          top: "10px",
+          zIndex: 1000,
+        }}
+      >
         <Fab
           aria-label="edit"
-          style={{
-            position: "absolute",
-            right: "10px",
-            top: "-40px",
+          sx={{
+            backgroundColor: "white",
             color: "rgb(44,100,77)",
+            "&:hover": {
+              backgroundColor: "#eaf8f0",
+            },
           }}
-          onClick={() => {
-            setVisible(true);
-          }}
+          onClick={() => setVisible(true)}
         >
           <EditIcon />
         </Fab>
       </Box>
-      <CreateForm
-        visible={visible}
-        setVisible={setVisible}
-        formdata={shareData}
-      />
+
+      <CreateForm visible={visible} setVisible={setVisible} formdata={shareData} />
     </>
   );
 };

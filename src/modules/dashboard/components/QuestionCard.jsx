@@ -6,19 +6,25 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Form from "./Form";
-import { Routing } from "../../../context/Routing";
-import {nonHoverCard,hoverCard,buttonStyle,buttonHoverStyle,cardStyle,myStyle,hoverQuestionStyle} from "../../../stylesheets/questionCard.js"
-
-//  as the name suggest it is a single question card  which will get called in questions jsx file
+import {
+  nonHoverCard,
+  hoverCard,
+  buttonStyle,
+  buttonHoverStyle,
+  cardStyle,
+  myStyle,
+  hoverQuestionStyle,
+} from "../../../stylesheets/questionCard.js";
 
 export default function QuestionCard({ question }) {
   const [lock, setLock] = React.useState(false);
   const [data, setData] = React.useState();
-  const { setDisplayDashboard, displayPoll } = React.createContext(Routing)
+
   const shareData = {
     heading: "Share with your friends",
     button: "Share",
   };
+
   const unlockData = {
     heading: "Enter the password to unlock and play (Try: admin)",
     button: "UNLOCK",
@@ -50,44 +56,45 @@ export default function QuestionCard({ question }) {
             {question}
           </Typography>
         </CardContent>
+
         <CardActions sx={{ position: "absolute", bottom: 0, right: 0 }}>
           <Button
             style={buttonStyle}
             onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              buttonHoverStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              buttonStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonStyle.backgroundColor)
             }
             aria-modal="true"
             size="small"
             onClick={() => {
-              setLock((prev) => !prev);
               setData(shareData);
+              setLock(true);
             }}
           >
             Share
           </Button>
+
           <Button
             style={buttonStyle}
             onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              buttonHoverStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              buttonStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonStyle.backgroundColor)
             }
             aria-modal="true"
             size="small"
             onClick={() => {
               setData(unlockData);
-              setLock((prev) => !prev);
+              setLock(true);
             }}
           >
-            {" "}
             {lock ? "OPENED" : "Locked"}
           </Button>
         </CardActions>

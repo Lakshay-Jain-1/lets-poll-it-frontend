@@ -1,3 +1,4 @@
+/* Landing.css */
 .landing-container {
   height: 93vh;
   width: 100%;
@@ -6,45 +7,43 @@
   align-items: center;
 }
 
-#particles canvas{
+#particles canvas {
   z-index: -1;
 }
 
 .disp-container {
   margin-top: 80px;
-  width: 50%;
+  width: 60%;
   color: white;
-  /* border: 2px solid blue; */
   text-align: center;
   font-size: 4rem;
   font-weight: bolder;
 }
 
+/* FIXED — chatbox no longer absolute */
 .chatbox {
   display: flex;
-  position: absolute;
   background-color: white;
   color: rgb(44, 100, 77);
   border-radius: 10px;
   height: 180px;
-  width: 200px;
-  right: 2%;
-  bottom: 12%;
+  width: 240px;
   border: 1px solid white;
+  margin-top: 50px;
+  align-self: flex-end;
 }
 
 .chatbox span {
   padding: 7px;
 }
 
+/* FIXED — unlock popup now responsive & centered within layout */
 .unlock-display {
-  background-color: #bfbfbf;
-  top: 15%;
-  position: absolute;
-  height: 60vh;
-  width: 60vh;
   background-color: #dedede;
   border-radius: 10px;
+  width: 60%;
+  min-height: 380px;
+  margin: 60px auto;
   display: flex;
   justify-content: center;
 }

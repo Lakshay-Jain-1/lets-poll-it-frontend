@@ -1,98 +1,87 @@
-
-  const formStyle = {
-    display: "block",
-    width: "500px",
-    position: "absolute",
-    transform: "translate(-50%,-50%)",
-    top: "50%",
-    left: "50%",
-  };
-
-  const headingStyle = {
-    textAlign: "center",
-    color: "white",
-    textTransform: "capitalize",
-    fontWeight: 500,
-    fontSize: "2.5rem",
-  };
-
-  const buttonStyle = {
-    height: "45px",
-    alignSelf: "center",
-    color: "white",
-    borderRadius: "10px",
-    backgroundColor: "rgba(0, 191, 111, 0.85)",
-    boxShadow:
-      "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset",
-    fontSize: "1rem",
-    cursor: "pointer",
-    border: "1px solid rgba(0, 191, 111)",
-  };
-
-  const downloadButtonStyle = {
-    height: "43px",
-    alignSelf: "center",
-    color: "white",
-    borderRadius: "10px",
-    backgroundColor: "rgba(0, 191, 111, 0.85)",
-    boxShadow:
-      "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset",
-    fontSize: "1rem",
-    cursor: "pointer",
-    border: "1px solid rgba(0, 191, 111)",
-    padding: "5px 10px",
-  };
-
-  const submitButtonStyle = {
-    height: "35px",
-    alignSelf: "center",
-    color: "white",
-    borderRadius: "10px",
-    backgroundColor: "rgba(0, 191, 111, 0.85)",
-    fontSize: "1rem",
-    cursor: "pointer",
-    border: "1px solid rgba(0, 191, 111)",
-    marginTop: "40px",
-    textAlign: "center",
-    width: "80px",
-    boxShadow:
-      "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset",
-  };
-
-  const hoverStyle = {
-    backgroundColor: "rgba(0, 191, 111, 1)",
-  };
-
-  const divStyle = {
+  const navbar = {
     display: "flex",
-    justifyContent: "center",
-  };
-
-
-
-  const backButtonStyle = {
-    height: "45px",
-    alignSelf: "center",
+    justifyContent: "space-around",
+    alignItems: "center",
+    padding: "14px 0",
     color: "white",
-    borderRadius: "10px",
-    backgroundColor: "rgba(0, 191, 111, 0.85)",
-    boxShadow:
-      "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset",
-    fontSize: "1rem",
+    fontFamily: "Poppins",
+    borderBottomLeftRadius: "10px",
+    borderBottomRightRadius: "10px",
+    marginBottom: "25px",
+    fontWeight: 600,
+  };
+
+  const navBtn = {
+    padding: "7px 18px",
+    border: "1px solid white",
+    borderRadius: "7px",
     cursor: "pointer",
-    border: "1px solid rgba(0, 191, 111)",
-    width: "100px",
-    position: "absolute",
-    top: "10%",
-    left: "30%",
+    transition: "0.25s",
   };
 
-  const downloadDivStyle = {
-    
-    display: "inline",
-    position: "absolute",
-    right: "30%",
-    top: "11%",
+  const styles = {
+    overlay: {
+      position: "fixed",
+      inset: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.65)",
+      backdropFilter: "blur(4px)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    },
+    modal: {
+      backgroundColor: "#cae8db",
+      borderRadius: "14px",
+      width: "85%",
+      maxWidth: "720px",
+      maxHeight: "85vh",
+      overflow: "auto",
+      padding: "32px 28px 20px 28px",
+      fontFamily: "Poppins",
+      position: "relative",
+      boxShadow: "0 0 25px rgba(0,0,0,0.3)",
+    },
+    titleRow: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "relative",
+      marginBottom: "10px",
+    },
+    heading: {
+        display: "inline",
+      fontSize: "2.6rem",
+      fontWeight: 600,
+      textAlign: "center",
+      color: "#275944",
+      margin: 0,
+    },
+    refreshIcon: {
+      cursor: "pointer",
+      color: "black",
+      borderRadius: "50%",
+      padding: "4px",
+      width: "30px",
+      height: "30px",
+    },
+    closeIcon: {
+      position: "absolute",
+      top: "10px",
+      right: "14px",
+      cursor: "pointer",
+      color: "#275944",
+      width: "30px",
+      height: "30px",
+      background: "white",
+      borderRadius: "50%",
+      padding: "4px",
+    },
   };
+export {
+  navbar,
+  navBtn,
+  styles
 
-export {downloadButtonStyle,downloadDivStyle,backButtonStyle,buttonStyle,formStyle,submitButtonStyle,hoverStyle,headingStyle,divStyle}
+};

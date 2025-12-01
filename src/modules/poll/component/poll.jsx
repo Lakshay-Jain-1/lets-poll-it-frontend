@@ -1,160 +1,144 @@
-import { useState } from "react";
-import { useEffect } from "react";
+// Poll.jsx
+import { useState, useEffect } from "react";
 import { pollAQuestion } from "../../../shared/services/api-client";
 import "../../../stylesheets/Options.css";
 import Texttospeech from "../../../shared/services/texttospeech";
 import handleDownloadPoll from "../../../shared/services/downloadPoll";
-import {downloadButtonStyle,downloadDivStyle,backButtonStyle,buttonStyle,formStyle,submitButtonStyle,hoverStyle,headingStyle,divStyle} from "../../../stylesheets/poll.js"
+import ResultsModal from "./ResultsModal";
+import {navBtn,navbar} from "../../../stylesheets/poll.js";
 export default function Poll() {
   const [question, setQuestion] = useState();
-  const [option1, setOption1] = useState();
-  const [option2, setOption2] = useState();
-  const [option3, setOption3] = useState();
-  const [option4, setOption4] = useState();
+  const [options, setOptions] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     setQuestion(localStorage.getItem("question"));
-    setOption4(localStorage.getItem("option4"));
-    setOption1(localStorage.getItem("option1"));
-    setOption2(localStorage.getItem("option2"));
-    setOption3(localStorage.getItem("option3"));
+    setOptions([
+      localStorage.getItem("option1"),
+      localStorage.getItem("option2"),
+      localStorage.getItem("option3"),
+      localStorage.getItem("option4"),
+    ]);
+  }, []);
 
-    //Don't change this as this is used to find which button is clicked
-    document.querySelectorAll("button").forEach((ele) => {
-      ele.addEventListener("click", (event) => {
-        event.target.setAttribute("clicked", "true");
-      });
-    });
-  });
-
-  function handlePoll() {
-    document.querySelectorAll(".pollbutton").forEach((ele) => {
-      if (
-        ele.getAttribute("clicked") &&
-        ele.innerText != "Submit" &&
-        ele.innerText != "Explore or Create Your Own Pol"
-      ) {
-        ele.removeAttribute("clicked")
-        pollit(question, ele.innerText);
-      }
-    });
-    localStorage.setItem("poll", true);
-    Texttospeech("Submitted");
+  function removePoll() {
+    localStorage.removeItem("poll");
+    window.history.back();
   }
 
   async function pollit(question, option) {
     await pollAQuestion(question, option);
   }
 
-
-  function removePoll() {
-    localStorage.removeItem("poll");
-    window.location.reload();
+  function handlePoll() {
+    document.querySelectorAll(".pollbutton").forEach((ele) => {
+      if (ele.getAttribute("clicked")) {
+        ele.removeAttribute("clicked");
+        pollit(question, ele.innerText.trim());
+      }
+    });
+    localStorage.setItem("poll", true);
+    Texttospeech("Submitted");
   }
 
+
   return (
-    <div id="content-to-pdf" style={{ fontFamily: "Poppins" }}>
-      <button onClick={removePoll} style={backButtonStyle}>
-        Go Back
-      </button>
-      <form onSubmit={(event) => event.preventDefault()} style={formStyle}>
-        <h1 style={headingStyle}>{question}</h1>
-        <div className="options-grid">
-          <button
-            className="pollbutton"
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                hoverStyle.backgroundColor)
-            }
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
-            }
-            style={buttonStyle}
-          >
-            {" "}
-            {option1}{" "}
-          </button>
-          <button
-            className="pollbutton"
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                hoverStyle.backgroundColor)
-            }
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
-            }
-            style={buttonStyle}
-          >
-            {" "}
-            {option2}{" "}
-          </button>
-          <button
-            className="pollbutton"
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                hoverStyle.backgroundColor)
-            }
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
-            }
-            style={buttonStyle}
-          >
-            {" "}
-            {option3}{" "}
-          </button>
-          <button
-            className="pollbutton"
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                hoverStyle.backgroundColor)
-            }
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                buttonStyle.backgroundColor)
-            }
-            style={buttonStyle}
-          >
-            {" "}
-            {option4}{" "}
-          </button>
-        </div>
-        <div style={divStyle}>
-          <button
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                hoverStyle.backgroundColor)
-            }
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor =
-                submitButtonStyle.backgroundColor)
-            }
-            style={submitButtonStyle}
-            onClick={handlePoll}
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-      <div style={downloadDivStyle}>
-        <button
+    <>
+      <div style={navbar}>
+        <span
+          style={navBtn}
+          onClick={removePoll}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#4ccd9f")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "")}
+        >
+          Go Back
+        </span>
+
+        <span
+          style={navBtn}
+          onClick={() => setModalOpen(true)}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#4ccd9f")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "")}
+        >
+          View Results
+        </span>
+
+        <span
+          style={navBtn}
           onClick={() =>
-            handleDownloadPoll(question, option1, option2, option3, option4)
+            handleDownloadPoll(question, options[0], options[1], options[2], options[3])
           }
-          onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor = hoverStyle.backgroundColor)
-          }
-          onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              downloadButtonStyle.backgroundColor)
-          }
-          style={downloadButtonStyle}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#4ccd9f")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "")}
         >
           Download Poll
-        </button>
+        </span>
       </div>
-    </div>
+
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        style={{ width: "500px", margin: "0 auto", fontFamily: "Poppins" }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            color: "white",
+            marginBottom: "28px",
+          }}
+        >
+          {question}
+        </h1>
+
+        <div className="options-grid">
+          {options.map((opt, index) => (
+            <button
+              key={index}
+              className="pollbutton"
+              style={{
+                backgroundColor: "rgba(0, 191, 111, 0.85)",
+                borderRadius: "8px",
+                padding: "10px 14px",
+                border: "1px solid rgba(0, 191, 111)",
+                cursor: "pointer",
+                fontWeight: 500,
+              }}
+              onMouseDown={(e) => e.target.setAttribute("clicked", "true")}
+              onMouseOver={(e) => (e.target.style.backgroundColor = "rgba(0,191,111,1)")}
+              onMouseOut={(e) => (e.target.style.backgroundColor = "rgba(0,191,111,0.85)")}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+
+        <button
+          onClick={handlePoll}
+          style={{
+            marginTop: "32px",
+            backgroundColor: "rgba(0, 191, 111, 0.85)",
+            border: "1px solid rgba(0, 191, 111)",
+            borderRadius: "9px",
+            width: "140px",
+            height: "42px",
+            cursor: "pointer",
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto",
+            color: "white",
+            fontWeight: 600,
+          }}
+        >
+          Submit
+        </button>
+      </form>
+
+      {/* RESULTS MODAL */}
+      <ResultsModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        question={question}
+        options={options}
+      />
+    </>
   );
 }

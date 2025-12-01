@@ -1,37 +1,66 @@
-
+// Chart.jsx
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import {Chart as ChartJS,CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend} from "chart.js";
-import {options,divStyle,refreshButtonStyle} from "../../../stylesheets/chart.js"
-import {gettingchartData,getchartData} from "../../../shared/services/chartData.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { options } from "../../../stylesheets/chart.js";
+import {
+  gettingchartData,
+  getchartData,
+} from "../../../shared/services/chartData.js";
 
-ChartJS.register(CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-const Chart = () => {
-  const [chartdata, setchartdata] = useState({})
-  let chartData = getchartData(chartdata)
-  useEffect(()=>{
-    chartData=getchartData(chartdata)
-  },[chartdata])
-  async function bardata() {
-    let obj = await gettingchartData(localStorage.getItem("question"))
-    setchartdata(obj)
+export default function Chart({ question, option1, option2, option3, option4, reload }) {
+  const [chartData, setChartData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  async function loadChartData() {
+    setLoading(true);
+    const q = question || localStorage.getItem("question");
+    const obj = await gettingchartData(q);
+    const processed = getchartData(obj);
+
+    setTimeout(() => {
+      setChartData(processed);
+      setLoading(false);
+    }, 1000);
   }
+
+  useEffect(() => {
+    loadChartData();
+  }, [reload]);
+
   return (
-    <div style={divStyle}>
-      <button
-        onClick={(e) => bardata()}
-        onMouseOut={(e) =>
-        (e.currentTarget.style.backgroundColor =
-          refreshButtonStyle.backgroundColor)
-        }
-        style={refreshButtonStyle}
-      >
-        Refresh The Poll
-      </button>
-      <Bar data={chartData} options={options} />
+    <div style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}>
+      {loading && (
+        <div
+          style={{
+            color: "#275944",
+            fontSize: "1.2rem",
+            fontWeight: 500,
+            opacity: 0.85,
+            fontFamily: "Poppins",
+          }}
+        >
+          Loading Results...
+        </div>
+      )}
+      {!loading && chartData && <Bar data={chartData} options={options} />}
     </div>
   );
-};
-
-export default Chart;
+}

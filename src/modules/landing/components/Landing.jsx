@@ -1,10 +1,9 @@
-import React from "react";
 import Button from "../../../shared/widgets/Button.jsx";
-import { Routing } from "../../../context/Routing";
-import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
-  const { setDisplayLanding, setDisplayDashboard } = useContext(Routing);
+  const navigate = useNavigate();
+
   const landingContainerStyle = {
     height: "90vh",
     width: "100%",
@@ -28,12 +27,10 @@ const Landing = () => {
       <div style={dispContainerStyle}>
         Polls that Matter: Discover What Everyone Thinks!
       </div>
+
       <div
         className="btn-container"
-        onClick={() => {
-          setDisplayLanding(false);
-          setDisplayDashboard(true);
-        }}
+        onClick={() => navigate("/home")} // take user to dashboard
       >
         <Button msg="Explore or Create Your Own Poll" />
       </div>

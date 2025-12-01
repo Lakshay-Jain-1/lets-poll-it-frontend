@@ -1,106 +1,81 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import ChatIcon from "@mui/icons-material/Chat";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
 import AI from "../services/chatgpt";
 
-export  function ChatBox() {
+import { styles } from "../../stylesheets/chatBot.js";
+
+export function ChatBox() {
   const [open, setOpen] = useState(false);
-  const [text, setText] = useState([]);
-  const message = useRef();
-  const fixed = {
-    position: "fixed",
-    bottom: "19px",
-    right: "19px",
-    width: "50px",
-    height: "50px",
-    zIndex: 1,
-  };
-  const absolute = {
-    display: open ? "block" : "none",
-    position: "absolute",
-    width: "250px",
-    height: "350px",
-    borderRadius: "12px",
-    // border: "1px solid #173529",
-    right: "50px",
-    bottom: "100px",
-    backgroundColor: "whitesmoke",
-  };
+  const [messages, setMessages] = useState([]);
+  const inputRef = useRef();
+  const endRef = useRef(null);
 
-  const textStyle = {
-   
-    padding: "5px",
-    textTransform: "capitalize",
-    color: "#262626",
-    fontWeight: 500,
-  };
+  async function pushMessage() {
+    const userMsg = inputRef.current.value.trim();
+    if (!userMsg) return;
 
-  const inputStyle = {
-    width: "230px",
-    marginLeft: "10px",
-    borderRadius: "10px",
-    padding: "0px 2px",
-    height: "30px",
-  };
+    const botReply = await AI(
+      `${userMsg} make it very short max to max 4 words`
+    );
 
-  const pushText = async () => {
-    let data = await AI(`${message.current.value} make it very short max to max 4 words`);
-    setText([...text,message.current.value,data]);
+    setMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
+    setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
+    inputRef.current.value = "";
+  }
+
+  // Auto-scroll to last message
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const box = {
+      display: open ? "flex" : "none",
+      flexDirection: "column",
+      position: "fixed",
+      right: "22px",
+      bottom: "90px",
+      width: "280px",
+      height: "360px",
+      borderRadius: "14px",
+      backgroundColor: "whitesmoke",
+      boxShadow: "0px 0px 12px rgba(0,0,0,0.3)",
+      overflow: "hidden",
+      fontFamily: "Poppins",
+      zIndex: 100,
   };
 
   return (
-    <div className="fixed" style={fixed}>
-      <ChatIcon
-        sx={{ fontSize: 35, color: "#ffffff" }}
-        style={{ cursor: "pointer" }}
-        onClick={() => setOpen((prev) => !prev)}
-      />
+    <>
+      <ChatIcon style={styles.fab} sx={{ fontSize: 45 }} onClick={() => setOpen((p) => !p)} />
 
-      <div className="relative">
-        <div className="absolute" style={absolute}>
-          <div style={{ position: "relative" }}>
-            <CloseIcon
-              style={{
-                position: "absolute",
-                right: 0,
-                cursor: "pointer",
-                color: "black",
-              }}
-              onClick={() => setOpen(false)}
-            />
-            <div style={{ position: "absolute", top: "30px", left: "10px" }}>
-              {text.map((ele, index) => {
-                return (
-                  <div key={index}>
-                    <h3 style={textStyle}>{ele}</h3>{" "}
-                  </div>
-                );
-              })}
-            </div>
+      <div style={box}>
+        <div style={styles.header}>
+          Ask PollBot
+          <CloseIcon style={styles.close} onClick={() => setOpen(false)} />
+        </div>
 
+        <div style={styles.messages}>
+          {messages.map((m, i) => (
             <div
+              key={i}
               style={{
-                position: "absolute",
-                display: "flex",
-                flexDirection: "row",
-                top: "314px",
+                ...styles.bubble,
+                ...(m.sender === "user" ? styles.user : styles.bot),
               }}
             >
-              <input style={inputStyle} type="text" ref={message} />
-              <SendIcon
-                style={{
-                  cursor: "pointer",
-                  position: "absolute",
-                  right: "3px",
-                  top: "0.7px",
-                }}
-                onClick={pushText}
-              />
+              {m.text}
             </div>
-          </div>
+          ))}
+          <div ref={endRef}></div>
+        </div>
+
+        <div style={styles.inputArea}>
+          <input style={styles.input} ref={inputRef} type="text" onKeyDown={(e) => e.key === "Enter" && pushMessage()} />
+          <SendIcon style={styles.send} onClick={pushMessage} />
         </div>
       </div>
-    </div>
+    </>
   );
 }
