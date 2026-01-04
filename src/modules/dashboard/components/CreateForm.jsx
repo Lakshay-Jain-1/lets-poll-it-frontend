@@ -70,8 +70,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
     }`;
 
     Texttospeech("YOUR AI GENERATED POLL");
-    const data = await AI(prompt, true);
-    const { question, mcq } = JSON.parse(data);
+    const { question, mcq } = await AI(prompt, true);
     const [option1, option2, option3, option4] = mcq;
 
     setAiquestion(question);

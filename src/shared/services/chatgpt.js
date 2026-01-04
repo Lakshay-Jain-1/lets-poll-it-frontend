@@ -1,22 +1,23 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
+import axios from "axios";
 async function AI(data, json = false) {
   try {
-    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GOOGLE_API_KEY);
-    let jsonkey = json ? { generationConfig: { responseMimeType: "application/json" } } : "";
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", ...jsonkey });
-    const prompt = `${data}`;
-    const result = await model.generateContent([prompt]);
-    const response = result.response;
-    const text = response.text();
-    return text;
+    const response = await axios.post(
+      import.meta.env.VITE_AI,
+      { data, json },
+      { withCredentials: true }
+    );
+    if(response.data["error"]){throw Error("")}
+    return response.data;
+
   } catch (err) {
-    if(json){
-      return JSON.stringify({"question":"Unable to process your request as api key have been exhaused","mcq":["","","",""]})
+    if (json) {
+      return {
+        question: "Unable to process your request as API key has been exhausted",
+        mcq: ["", "", "", ""]
+      };
     }
-    return "Api key have been exhausted. Sorry for the inconvienance!!"
+
+    return "API error. Please try again later.";
   }
-
 }
-
 export default AI;
