@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <div style={headerStyle}>
-      <div style={headingStyle}>Let'sPoll.in</div>
+      <div style={headingStyle}>Let's Poll it</div>
     </div>
   );
 };
