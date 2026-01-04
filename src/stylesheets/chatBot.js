@@ -62,6 +62,7 @@ const styles = {
     alignItems: "center",
     padding: "8px 10px",
     gap: "8px",
+    width:"100%",
     backgroundColor: "#e8e8e8",
   },
   input: {
@@ -70,10 +71,12 @@ const styles = {
     borderRadius: "10px",
     border: "1px solid gray",
     padding: "0 8px",
+    width:"90%"
   },
   send: {
     cursor: "pointer",
     color: "#3B634F",
+    width:"10%"
   },
 };
 
