@@ -7,19 +7,37 @@ import AI from "../services/chatgpt";
 export function ChatBox() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+
   const inputRef = useRef(null);
   const endRef = useRef(null);
+
+  // --- REAL viewport height (Android-safe) ---
+  useEffect(() => {
+    const updateHeight = () => {
+      const h = window.visualViewport?.height || window.innerHeight;
+      setViewportHeight(h);
+    };
+
+    updateHeight();
+
+    window.visualViewport?.addEventListener("resize", updateHeight);
+    window.addEventListener("resize", updateHeight);
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", updateHeight);
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
 
   async function pushMessage() {
     const userMsg = inputRef.current.value.trim();
     if (!userMsg) return;
 
     inputRef.current.value = "";
-
     setMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
 
     const botReply = await AI(`${userMsg} make it very short max to max 4 words`);
-
     setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
   }
 
@@ -27,19 +45,19 @@ export function ChatBox() {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const box = {
+  // --- Layout derived from reality, not vh ---
+  const boxHeight = Math.min(viewportHeight * 0.7, 420);
+
+  const boxStyle = {
     display: open ? "flex" : "none",
     flexDirection: "column",
     position: "fixed",
-
     right: "16px",
     bottom: "16px",
 
     width: "90vw",
     maxWidth: "320px",
-
-    height: "70vh",
-    maxHeight: "420px",
+    height: boxHeight,
 
     borderRadius: "14px",
     backgroundColor: "whitesmoke",
@@ -52,12 +70,12 @@ export function ChatBox() {
   return (
     <>
       <ChatIcon
-        style={styles.fab}
         sx={{ fontSize: 45 }}
+        style={styles.fab}
         onClick={() => setOpen((p) => !p)}
       />
 
-      <div style={box}>
+      <div style={boxStyle}>
         <div style={styles.header}>
           Ask PollBot
           <CloseIcon style={styles.close} onClick={() => setOpen(false)} />
@@ -95,10 +113,8 @@ export function ChatBox() {
 const styles = {
   fab: {
     position: "fixed",
-    bottom: "16px",
     right: "16px",
-    width: "55px",
-    height: "55px",
+    bottom: "16px",
     cursor: "pointer",
     color: "white",
     zIndex: 100,
@@ -109,7 +125,6 @@ const styles = {
     background: "#3B634F",
     color: "white",
     fontWeight: 600,
-    fontSize: "1.1rem",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -126,7 +141,7 @@ const styles = {
   messages: {
     flex: 1,
     overflowY: "auto",
-    padding: "10px 12px",
+    padding: "10px",
     display: "flex",
     flexDirection: "column",
     gap: "8px",
@@ -138,29 +153,26 @@ const styles = {
     borderRadius: "12px",
     fontSize: "0.9rem",
     wordBreak: "break-word",
-    lineHeight: "1.3",
   },
 
   user: {
     alignSelf: "flex-end",
     background: "#3B634F",
     color: "white",
-    borderTopRightRadius: "0px",
+    borderTopRightRadius: 0,
   },
 
   bot: {
     alignSelf: "flex-start",
     background: "white",
-    color: "#262626",
-    borderTopLeftRadius: "0px",
     border: "1px solid rgba(0,0,0,0.1)",
+    borderTopLeftRadius: 0,
   },
 
   inputArea: {
     display: "flex",
-    alignItems: "center",
-    padding: "8px",
     gap: "8px",
+    padding: "8px",
     backgroundColor: "#e8e8e8",
     flexShrink: 0,
   },
@@ -171,7 +183,7 @@ const styles = {
     borderRadius: "10px",
     border: "1px solid gray",
     padding: "0 10px",
-    fontSize: "16px", // critical for mobile (prevents zoom)
+    fontSize: "16px", // critical for Android
     outline: "none",
   },
 
