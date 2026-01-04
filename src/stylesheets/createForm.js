@@ -1,6 +1,9 @@
+
 const dialogStyle = {
   backgroundColor: "#cae8db",
   fontFamily: "Poppins",
+  display:"grid",
+  placeItems:"center"
 };
 
 const buttonStyle = {

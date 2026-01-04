@@ -1,65 +1,77 @@
 /* Landing.css */
+
 .landing-container {
-  height: 93vh;
+  /* Use almost full height, but account for the header */
+  height: 90vh; 
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  /* CRITICAL CHANGE: This centers content vertically */
+  justify-content: center; 
+  
+  padding: 0 1rem;
+  box-sizing: border-box;
+  position: relative; /* For positioning the chat icon absolutely if needed */
 }
 
 #particles canvas {
   z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .disp-container {
-  margin-top: 80px;
+  /* Removed the fixed margin-top so flexbox handles the centering */
+  margin-top: 0; 
   width: 60%;
   color: white;
   text-align: center;
-  font-size: 4rem;
-  font-weight: bolder;
+  font-size: 3.5rem;
+  font-weight: 700; /* Made it bolder for impact */
+  font-family: "Poppins", sans-serif;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2); /* distinctness against green */
 }
 
-/* FIXED — chatbox no longer absolute */
-.chatbox {
-  display: flex;
-  background-color: white;
-  color: rgb(44, 100, 77);
-  border-radius: 10px;
-  height: 180px;
-  width: 240px;
-  border: 1px solid white;
-  margin-top: 50px;
-  align-self: flex-end;
-}
-
-.chatbox span {
-  padding: 7px;
-}
-
-/* FIXED — unlock popup now responsive & centered within layout */
-.unlock-display {
-  background-color: #dedede;
-  border-radius: 10px;
-  width: 60%;
-  min-height: 380px;
-  margin: 60px auto;
+.btn-container {
+  margin-top: 3rem; /* More space between text and button */
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.unlock-display input {
-  background-color: #dedede;
-  border: 1px solid rgb(44, 100, 77);
-  text-align: center;
-  padding: 2px;
+/* Make the button wrapper itself responsive if the Button component allows it */
+.btn-container button {
+    /* If you can target the button directly via CSS */
+    padding: 15px 30px;
+    font-size: 1.2rem;
 }
 
-.unlock-display form {
-  margin-top: 120px;
-  text-align: center;
-}
+/* --- MOBILE MAGIC (Max-width 768px) --- */
+@media screen and (max-width: 768px) {
+  .landing-container {
+    /* Ensure we use the full height available */
+    min-height: 80vh; 
+    justify-content: center; /* Keeps it centered vertically */
+  }
 
-.unlock-display label {
-  display: block;
+  .disp-container {
+    width: 95%; /* Use full width of the phone */
+    font-size: 2.2rem; /* Clean, readable size */
+    margin-bottom: 1rem; /* Slight spacing */
+  }
+
+  .btn-container {
+    margin-top: 2rem;
+  }
+  
+  /* If you have control over the button styles, make it wide on mobile */
+  /* You might need to add a class to your <Button /> component or wrap it */
+  .btn-container > * { 
+      width: 80%; /* Make the button wider for thumbs */
+      max-width: 300px;
+  }
 }

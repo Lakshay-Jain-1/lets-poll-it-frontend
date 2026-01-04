@@ -8,10 +8,10 @@ function Questions() {
   let [loading, setLoading] = useState(true);
   const display_all_questions = async () => {
     const data = await getALLQuestion();
-    setTimeout(()=>{
+    setTimeout(() => {
       setLoading(false);
-    },2000)
-  
+    }, 2000);
+
     setQuestions(data);
     return data;
   };
@@ -21,9 +21,27 @@ function Questions() {
 
   return (
     <div className="second-page">
-     
-      {loading ? <h2 style={{ display: loading ? "block" : "none", fontFamily: "Poppins", color: "white", textAlign: "center",position:"absolute",top:"35vh",left:"40vw",fontSize:"96px" }}>Loading..........</h2> : questions.map((ele, index) => <QuestionCard key={index} question={ele.question} />)}
-
+      {loading ? (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "Poppins",
+            color: "white",
+            fontSize: "clamp(24px, 6vw, 64px)",
+            textAlign: "center",
+          }}
+        >
+          Loading…
+        </div>
+      ) : (
+        questions.map((ele, index) => (
+          <QuestionCard key={index} question={ele.question} />
+        ))
+      )}
     </div>
   );
 }

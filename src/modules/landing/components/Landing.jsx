@@ -1,36 +1,20 @@
+import React from "react"; // Don't forget this if you're on older React versions
 import Button from "../../../shared/widgets/Button.jsx";
 import { useNavigate } from "react-router-dom";
+import "../../../stylesheets/Landing.css"; // Ensure the CSS is actually imported!
 
 const Landing = () => {
   const navigate = useNavigate();
 
-  const landingContainerStyle = {
-    height: "90vh",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  };
-
-  const dispContainerStyle = {
-    marginTop: "80px",
-    width: "50%",
-    color: "white",
-    textAlign: "center",
-    fontSize: "3.7rem",
-    fontWeight: 500,
-    fontFamily: "Poppins",
-  };
-
   return (
-    <div style={landingContainerStyle}>
-      <div style={dispContainerStyle}>
+    <div className="landing-container">
+      <div className="disp-container">
         Polls that Matter: Discover What Everyone Thinks!
       </div>
 
       <div
         className="btn-container"
-        onClick={() => navigate("/home")} // take user to dashboard
+        onClick={() => navigate("/home")}
       >
         <Button msg="Explore or Create Your Own Poll" />
       </div>

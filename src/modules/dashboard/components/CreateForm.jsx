@@ -86,18 +86,20 @@ export default function CreateForm({ visible, setVisible, formdata }) {
       open={visible || false}
       onClose={handleClose}
       PaperProps={{ component: "form", onSubmit: handleSubmit }}
-      style={{ backdropFilter: "saturate(3)" }}
+      style={{ backdropFilter: "saturate(3)",display:"grid",placeItems:"center" }}
     >
       <DialogTitle style={dialogTitleStyle}>
         {visible && formdata ? formdata.heading : ""}
+        <div style={{display:"flex",justifyContent:"space-between"}}>
         <div onClick={getLocation}>
-          <LocationOnIcon style={{ position: "relative", left: "7vw" }} />
+          <LocationOnIcon  />
         </div>
         <img
           onClick={AIgeneratedPoll}
           style={{ width: "40px", height: "40px", cursor: "pointer" }}
           src="./ai.png"
         />
+        </div>
       </DialogTitle>
 
       <DialogContent style={dialogStyle}>
@@ -165,7 +167,6 @@ export default function CreateForm({ visible, setVisible, formdata }) {
             textAlign: "center",
             backgroundColor: "#cae8db",
             fontFamily: "Poppins",
-            marginLeft: "25%",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
           autoComplete="off"
@@ -176,7 +177,7 @@ export default function CreateForm({ visible, setVisible, formdata }) {
         />
       </DialogContent>
 
-      <DialogActions style={dialogStyle}>
+      <DialogActions style={{...dialogStyle,display:"flex"}}>
         <Button
           onMouseOver={(e) =>
             (e.currentTarget.style.backgroundColor =

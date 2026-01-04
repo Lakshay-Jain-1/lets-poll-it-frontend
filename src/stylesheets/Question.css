@@ -2,8 +2,8 @@
     display: grid;
     grid-template-columns: auto auto auto;
     row-gap: 40px;
-    margin-left: 8vw;
     margin-top: 8vh;
+    place-items: center;
   }
   
   @media only screen and (max-width: 1050px) {

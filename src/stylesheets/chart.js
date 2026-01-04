@@ -13,11 +13,12 @@ const refreshButtonStyle = {
 };
 
 const divStyle = {
-  width: "100%",
+  width: "100%", // Ensure it takes available space
   maxWidth: "600px",
-  margin: "60px auto",
+  margin: "20px auto", // Reduced top margin
+  padding: "0 10px", // Add padding so chart doesn't touch screen edge
+  boxSizing: "border-box"
 };
-
 const options = {
   responsive: true,
   plugins: {

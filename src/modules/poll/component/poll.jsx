@@ -1,11 +1,12 @@
-// Poll.jsx
+// poll.jsx
 import { useState, useEffect } from "react";
-import { pollAQuestion } from "../../../shared/services/api-client";
-import "../../../stylesheets/Options.css";
-import Texttospeech from "../../../shared/services/texttospeech";
-import handleDownloadPoll from "../../../shared/services/downloadPoll";
-import ResultsModal from "./ResultsModal";
-import {navBtn,navbar} from "../../../stylesheets/poll.js";
+import { pollAQuestion } from "../../../shared/services/api-client"; //
+import "../../../stylesheets/Options.css"; //
+import Texttospeech from "../../../shared/services/texttospeech"; //
+import handleDownloadPoll from "../../../shared/services/downloadPoll"; //
+import ResultsModal from "./ResultsModal"; //
+import { navBtn, navbar } from "../../../stylesheets/poll.js"; //
+
 export default function Poll() {
   const [question, setQuestion] = useState();
   const [options, setOptions] = useState([]);
@@ -41,10 +42,10 @@ export default function Poll() {
     Texttospeech("Submitted");
   }
 
-
   return (
     <>
-      <div style={navbar}>
+      {/* Added flexWrap to handle very small screens gracefully */}
+      <div style={{...navbar, flexWrap: "wrap", gap: "10px"}}> 
         <span
           style={navBtn}
           onClick={removePoll}
@@ -77,13 +78,24 @@ export default function Poll() {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        style={{ width: "500px", margin: "0 auto", fontFamily: "Poppins" }}
+        // CHANGED: Fixed width "500px" -> width: "90%", maxWidth: "500px"
+        // Added boxSizing to ensure padding doesn't break width
+        style={{ 
+            width: "90%", 
+            maxWidth: "500px", 
+            margin: "0 auto", 
+            fontFamily: "Poppins",
+            boxSizing: "border-box" 
+        }}
       >
         <h1
           style={{
             textAlign: "center",
             color: "white",
             marginBottom: "28px",
+            // Added word-wrap and responsive font size logic
+            fontSize: "clamp(1.5rem, 5vw, 2.5rem)", 
+            wordWrap: "break-word"
           }}
         >
           {question}
@@ -101,6 +113,9 @@ export default function Poll() {
                 border: "1px solid rgba(0, 191, 111)",
                 cursor: "pointer",
                 fontWeight: 500,
+                // Ensure buttons don't overflow text
+                whiteSpace: "normal",
+                wordWrap: "break-word"
               }}
               onMouseDown={(e) => e.target.setAttribute("clicked", "true")}
               onMouseOver={(e) => (e.target.style.backgroundColor = "rgba(0,191,111,1)")}
@@ -132,7 +147,6 @@ export default function Poll() {
         </button>
       </form>
 
-      {/* RESULTS MODAL */}
       <ResultsModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
